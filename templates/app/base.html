@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+
+<head>
+    <title>
+        App -
+        {% block title_block %}
+            Default Title
+        {% endblock %}
+    </title>
+</head>
+
+<body>
+    <div>
+        {% block body_block %}
+        {% endblock %}
+    </div>
+    <div>
+        {% block sidebar_block %}
+        {% endblock %}
+    </div>
+    <hr />
+    <div>
+        <p>This text is from base.html</p>         
+    </div>
+</body>
+
+</html>

@@ -3,8 +3,10 @@ from django.shortcuts import render
 
 # Create your views here.
 
-def index(request):
-    return HttpResponse("Hello, This is an index page")
+def home(request):
+    context_dict = {}
+
+    return render(request, 'app/home.html', context=context_dict)
 
 def search(request):
     return HttpResponse("Hello, This is a search page")
