@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from app.models import UserProfile
 
 # Create your views here.
 
