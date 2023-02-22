@@ -10,6 +10,8 @@
             App -
             {% block title_block %}Default Title{% endblock %}
         </title>
+        <!-- CSS -->
+        <link rel="stylesheet" href="{% static "css/base.css" %}" />
         <!-- Bootstrap core CSS -->
         <link href="https://getbootstrap.com/docs/4.2/dist/css/bootstrap.min.css"
               rel="stylesheet"
@@ -20,7 +22,8 @@
         <header>
             <div class="navbar navbar-expand-lg  navbar-dark bg-primary shadow-sm">
                 <div class="container d-flex justify-content-between">
-                    <a href="{% url 'app:home' %}" class="navbar-brand d-flex align-items-center">
+                    <a href="{% url 'app:home' %}"
+                       class="navbar-brand d-flex align-items-center">
                         <svg xmlns="http://www.w3.org/2000/svg"
                              width="20"
                              height="20"
@@ -75,7 +78,10 @@
         <div>
             {% block sidebar_block %}{% endblock %}
         </div>
-        <footer>
+        <footer class="text-muted bg-primary fixed-bottom">
+            <div class="container">
+                <p class="text-white">Album example is © Bootstrap, but please download and customize it for yourself!</p>
+            </div>
         </footer>
         <!-- Bootstrap core JavaScript -->
         <!-- Placed at the end of the document so the pages load faster -->
