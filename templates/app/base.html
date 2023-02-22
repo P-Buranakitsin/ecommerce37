@@ -1,27 +1,87 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-
 <html>
-
-<head>
-    <title>
-        App -
-        {% block title_block %}
-            Default Title
-        {% endblock %}
-    </title>
-</head>
-
-<body>
-    <div>
-        {% block body_block %}
-        {% endblock %}
-    </div>
-    <div>
-        {% block sidebar_block %}
-        {% endblock %}
-    </div>
-    <hr />
-</body>
-
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <title>
+            App -
+            {% block title_block %}Default Title{% endblock %}
+        </title>
+        <!-- Bootstrap core CSS -->
+        <link href="https://getbootstrap.com/docs/4.2/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+              crossorigin="anonymous">
+    </head>
+    <body>
+        <header>
+            <div class="navbar navbar-expand-lg  navbar-dark bg-primary shadow-sm">
+                <div class="container d-flex justify-content-between">
+                    <a href="#" class="navbar-brand d-flex align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             width="20"
+                             height="20"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2"
+                             stroke-linecap="round"
+                             stroke-linejoin="round"
+                             class="mr-2"
+                             focusable="false"
+                             aria-hidden="true">
+                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                            <circle cx="12" cy="13" r="4"></circle>
+                        </svg>
+                        <strong>Logo</strong>
+                    </a>
+                    <button class="navbar-toggler collapsed"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#navbarColor02"
+                            aria-controls="navbarColor02"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarColor02">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Search</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Contact Us</a>
+                            </li>
+                        </ul>
+                        <form class="form-inline">
+                            <button class="btn btn-outline-light my-2 my-sm-0 mr-4" type="submit">Log in</button>
+                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div>
+            {% block body_block %}{% endblock %}
+        </div>
+        <div>
+            {% block sidebar_block %}{% endblock %}
+        </div>
+        <footer>
+        </footer>
+        <!-- Bootstrap core JavaScript -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="https://getbootstrap.com/docs/4.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+        <script src="https://getbootstrap.com/docs/4.2/examples/dashboard/dashboard.js"></script>
+    </body>
 </html>
