@@ -18,14 +18,11 @@
               integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
               crossorigin="anonymous">
     </head>
-    <body>
+    <body class="d-flex flex-column min-vh-100">
         {% block navbar %}{% endblock %}
-        <div>
+        <main>
             {% block body_block %}{% endblock %}
-        </div>
-        <div>
-            {% block sidebar_block %}{% endblock %}
-        </div>
+        </main>
         {% block footer %}{% endblock %}
         <!-- Bootstrap core JavaScript -->
         <!-- Placed at the end of the document so the pages load faster -->

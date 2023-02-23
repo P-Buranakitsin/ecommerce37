@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% block navbar %}
     <header>
-        <div class="navbar navbar-expand-lg  navbar-dark bg-primary shadow-sm">
+        <div class="navbar navbar-expand-lg  navbar-dark bg-primary shadow-sm fixed-top">
             <div class="container d-flex justify-content-between">
                 <a href="{% url 'app:home' %}"
                    class="navbar-brand d-flex align-items-center">
@@ -56,9 +56,9 @@
     </header>
 {% endblock %}
 {% block footer %}
-<footer class="text-muted bg-primary fixed-bottom">
+<footer class="text-muted bg-light mt-auto">
     <div class="container">
-        <p class="text-white">Album example is © Bootstrap, but please download and customize it for yourself!</p>
+        <p class="">Album example is © Bootstrap, but please download and customize it for yourself!</p>
     </div>
 </footer>
 {% endblock %}
