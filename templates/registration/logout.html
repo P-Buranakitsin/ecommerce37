@@ -1,7 +1,47 @@
-{% extends 'app/base.html' %}
+<!-- {% extends 'app/base.html' %}
 {% load staticfiles %}
 {% block title_block %}Logout{% endblock %}
-{% block body_block %}
-    <h1>Logged Out</h1>
+{% block body_block %} -->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+            {% block title_block %}Logout{% endblock %}
+        </title>
+    </head>
+    <header>
+        <h1>Logged Out</h1>
+    </header>
+    <div class="header">
+        <div class="logout">
+            <a href="{% url 'registration_register' %}">Register</a>
+            <a href="{% url 'registration_login' %}">Login</a>
+        </div>
+    </div>
+
+    <style>
+        .header {
+            background-color: #7950d9;
+            height: 100px;
+            width: 100%;
+        }
+        .logout {
+            float: right;
+            margin-top: 20px;
+            margin-right: 20px;
+        }
+        .logout a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+        .logout a:hover {
+            color: #f2f2f2;
+        }
+
+    </style>
+    
     <p>You have been successfully logged out. Thanks for spending time on our app!</p>
-{% endblock %}
+</html>
+<!-- {% endblock %} -->

@@ -1,16 +1,102 @@
-{% extends 'app/base.html' %}
-{% load staticfiles %}
-{% block title_block %}Login{% endblock %}
-{% block body_block %}
-    <h1>Login</h1>
-    <form method="post" action=".">
-        {% csrf_token %}
-        {{ form.as_p }}
+<!-- {% extends 'app/base.html' %} -->
+<!DOCTYPE html>
+<!-- {% load staticfiles %} -->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+            {% block title_block %}Login{% endblock %}
+        </title>
+    </head>
+<!-- {% block body_block %} -->
+    <header>
+        <img src="{% static 'img/logo.png' %}" alt="Logo" />
+    </header>
+    <div class="main-container">
+        <h1>Login</h1>
+        <form method="post" action=".">
+            <legend style="font-size: 2em;margin-bottom: 15px;white-space: normal;">
+                <span style="display: block; width: 260px;">
+                     Welcome 
+                </span>
+            </legend>
+            <div class="form-group">
+                <label for="id_username">Username:</label>
+                <input type="text" name="username" maxlength="30" required id="id_username" />
+            </div>
+            <div class="form-group">
+                <label for="id_password">Password:</label>
+                <input type="password" name="password" required id="id_password" />
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="donotcache" value="1">
+                "Don't cache my password"
+            </div>
+        <!-- {% csrf_token %}
+        {{ form.as_p }} -->
         <input type="submit" value="Log In" />
+        <p class="footer-text">
+                Not registered?
+                <a href="{% url 'registration_register' %}">Register here!</a>
+            </p>
         <input type="hidden" name="next" value="{{ next }}" />
     </form>
-    <p>
-        Not registered?
-        <a href="{% url 'registration_register' %}">Register here!</a>
-    </p>
-{% endblock %}
+    </div>
+    
+    
+    <style>
+        form {
+                margin: 0 auto;
+                width: 300px;
+                padding: 1em;
+                border: 0px solid #7950d9;
+                border-radius: 1em;
+            }
+        .form-group { margin-bottom: 2em; }
+        label {
+            display: inline-block;
+            width: 50px;
+            text-align: right;
+        }
+        input, textarea {
+            font: 1.5em sans-serif;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            border: 2px solid #666363;
+        }
+        
+        textarea {
+            vertical-align: top;
+            height: 5em;
+            resize: vertical;
+        }
+        
+        .main-container {
+            margin: 0 auto;
+            width: 300px;
+            padding: 4em;
+            border: 2px solid #34b260;
+            border-radius: 1em;
+        } 
+        header {
+            text-align: center;
+        }
+        header img {
+            width: 100px;
+        }
+        .footer-text {
+            text-align: center;
+        }
+        .footer-text a {
+            color: #7950d9;
+        }
+        .footer-text a:hover {
+            color: #df2fd0;
+        }
+
+
+    </style>
+</html>
+
+<!-- {% endblock %} -->
