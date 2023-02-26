@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from app.models import UserProfile
@@ -54,3 +55,16 @@ def test(request):
 def logout(request):
     logout(request)
     return redirect('home')
+
+#ShoppingCart
+@login_required
+def viewShoppingCart(request):
+    return 0
+
+@login_required
+def addShoppingCart(request):
+    return 0
+
+@login_required
+def removeShoppingCart(request):
+    return 0
