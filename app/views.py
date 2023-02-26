@@ -6,6 +6,8 @@ from app.models import UserProfile
 
 def home(request):
     context_dict = {}
+    context_dict['most_popular_items'] = [{}, {}, {}]
+    context_dict['other_items'] = [{}, {}, {}, {}, {}, {}]
 
     return render(request, 'app/home.html', context=context_dict)
 

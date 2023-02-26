@@ -1,0 +1,9 @@
+footer {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.strike-through-text {
+    text-decoration: line-through;
+}
+
