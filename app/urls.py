@@ -1,5 +1,6 @@
 from django.urls import path, include
 from app import views
+from django.contrib import admin
 
 app_name = 'app'
 
@@ -8,7 +9,8 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('login/', views.login, name='login'),
 
-    path('users/', include('users.urls'))
+    path('admin/', admin.site.urls),
+    path('users/', include('users.urls')),
 
 ]
 
