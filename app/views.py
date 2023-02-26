@@ -31,7 +31,7 @@ def login(request):
             messages.info(request, "Username or Password is incorrect!")
 
     context = {}
-    return render(request, 'users/login.html',context)
+    return render(request, 'app/login.html',context)
 
 def register(request):
     form = CreateUserForm()
@@ -45,7 +45,7 @@ def register(request):
             #return HttpResponse('1')
     else:
         context = {'form': form}
-    return render(request, 'users/register.html', context)
+    return render(request, 'app/register.html', context)
     #return HttpResponse('2')
 
 def test(request):
