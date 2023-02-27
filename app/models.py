@@ -36,3 +36,16 @@ class ShoppingCart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     commodities = models.ForeignKey(Commodities, on_delete=models.CASCADE)
     amount = models.ImageField(default=1)
+"""
+    def __init__(self, *args, **kwargs):
+        self.items = []
+        self.total_price = 0
+
+    def add_commodities(self, commodities):
+        self.price += commodities.price
+        for item in self.items:
+            if item.commodities.c_id == commodities.c_id:
+                item.amount += 1
+                return
+        self.items.append()
+"""
