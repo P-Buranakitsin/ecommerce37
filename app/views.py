@@ -17,7 +17,9 @@ def home(request):
     return render(request, 'app/home.html', context=context_dict)
 class SearchView(View):
     def get(self, request):
-        return render(request, 'app/search.html')
+        a = [0 for x in range(36)]
+        context_dict = {'items' : a}
+        return render(request, 'app/search.html', context=context_dict)
 
 class LoginView(View):
     def get(self, request):
