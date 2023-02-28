@@ -1,45 +1,52 @@
 {% extends 'app/baseWithFootNav.html' %}
 {% load staticfiles %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/home.css" %}" />
+{% endblock %}
 {% block title_block %}Homepage{% endblock %}
 {% block body_block %}
-<section class="jumbotron text-center">
-    <div class="container">
-        <h1 class="jumbotron-heading">Ecommerce Website</h1>
-        <p class="lead text-muted">Browse our items from multiple vendors</p>
-        <p>
-        <form class="form-inline mt-2 mt-md-0 justify-content-center">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        </p>
-    </div>
-</section>
-<div class="py-3">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 py-2">
-                <h3>Most popular items</h3>
-                <p class="lead text-muted">Best selling items</p>
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Ecommerce Website</h1>
+            <p class="lead text-muted">Browse our items from multiple vendors</p>
+            <p>
+                <form class="form-inline mt-2 mt-md-0 justify-content-center">
+                    <input class="form-control mr-sm-2"
+                           type="text"
+                           placeholder="Search"
+                           aria-label="Search">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </p>
+        </div>
+    </section>
+    <div class="py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 py-2">
+                    <h3>Most popular items</h3>
+                    <p class="lead text-muted">Best selling items</p>
+                </div>
+                {% if most_popular_items %}
+                    {% for popular_item in most_popular_items %}
+                        <div class="col-md-4">{% include 'component/card.html' %}</div>
+                    {% endfor %}
+                {% endif %}
+                <div class="col-12 py-2">
+                    <div class="d-flex flex-row justify-content-between">
+                        <div>
+                            <h3>Others</h3>
+                            <p class="lead text-muted">Check out other items that you might be interested</p>
+                        </div>
+                        <a class="view-all-text" href="{% url 'app:search' %}">View All</a>
+                    </div>
+                </div>
+                {% if other_items %}
+                    {% for other_item in other_items %}
+                        <div class="col-md-4">{% include 'component/card.html' %}</div>
+                    {% endfor %}
+                {% endif %}
             </div>
-            {% if most_popular_items %}
-            {% for popular_item in most_popular_items %}
-            <div class="col-md-4">
-                {% include 'component/card.html' %}
-            </div>
-            {% endfor %}
-            {% endif %}
-            <div class="col-12 py-2">
-                <h3>Others</h3>
-                <p class="lead text-muted">Check out other items that you might be interested</p>
-            </div>
-            {% if other_items %}
-            {% for other_item in other_items %}
-            <div class="col-md-4">
-                {% include 'component/card.html' %}
-            </div>
-            {% endfor %}
-            {% endif %}
         </div>
     </div>
-</div>
 {% endblock %}
