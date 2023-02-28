@@ -15,9 +15,11 @@ def home(request):
     context_dict['other_items'] = [{}, {}, {}, {}, {}, {}]
 
     return render(request, 'app/home.html', context=context_dict)
-
-def search(request):
-    return HttpResponse("Hello, This is a search page")
+class SearchView(View):
+    def get(self, request):
+        a = [0 for x in range(36)]
+        context_dict = {'items' : a}
+        return render(request, 'app/search.html', context=context_dict)
 
 class LoginView(View):
     def get(self, request):
