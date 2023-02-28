@@ -1,7 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.views import View
 from app.models import UserProfile
-from app.forms import CreateUserForm
+from app.forms import CreateUserForm, LoginUserForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
@@ -17,22 +19,24 @@ def home(request):
 def search(request):
     return HttpResponse("Hello, This is a search page")
 
-def login(request):
-    if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        form = authenticate(request, username=username, password=password)
+class LoginView(View):
+    def get(self, request):
+        form = LoginUserForm()
+        context = { 'form': form}
+        return render(request, 'app/login.html',context)
 
-        if form is not None:
+    def post(self, request):
+        form = LoginUserForm(request.POST)
+
+        if form.is_valid():
             login(request, form)
-            return redirect('home')
-
+            return redirect(reverse('app:home'))
         else:
-            messages.info(request, "Username or Password is incorrect!")
+            print(form.errors)
 
-    context = {}
-    return render(request, 'app/login.html',context)
-
+        context = { 'form': form}
+        return render(request, 'app/login.html',context)
+        
 def register(request):
     form = CreateUserForm()
     if request.method == 'POST':
