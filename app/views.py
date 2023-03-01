@@ -60,3 +60,9 @@ def test(request):
 def logout(request):
     logout(request)
     return redirect('home')
+
+def buy(request):
+    print(123123123)
+    form = CreateUserForm()
+    context = {'form': form}
+    return render(request, 'app/buy.html', context)

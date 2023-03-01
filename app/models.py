@@ -19,3 +19,20 @@ class User(models.Model):
 
     def __str__(self):
         return self.user_id
+
+
+class Order(models.Model):
+    id = models.AutoField(primary_key=True, max_length=20)
+    product_name = models.CharField(verbose_name='商品名',max_length=200, blank=True)
+    num = models.IntegerField(verbose_name='购买数量')
+    price = models.DecimalField(verbose_name='价格', max_digits=10, decimal_places=2, default=0)  #长度为8，精度为2
+    address = models.CharField(verbose_name='地址',max_length=2000)
+    phone = models.CharField(verbose_name='手机号',max_length=11)
+    name = models.CharField(verbose_name='姓名',max_length=20)
+    message = models.CharField(verbose_name='留言',max_length=20)
+
+
+class Comment(models.Model):
+    id = models.AutoField(primary_key=True, max_length=20)
+    order_id = models.IntegerField(verbose_name='商品id')
+    content = models.CharField(verbose_name='商品内容',max_length=2000)
