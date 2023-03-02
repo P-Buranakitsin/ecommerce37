@@ -7,6 +7,7 @@ from app.models import UserProfile, ShoppingCart, Commodities
 from app.forms import CreateUserForm, LoginUserForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 
@@ -16,10 +17,27 @@ def home(request):
     context_dict['other_items'] = [{}, {}, {}, {}, {}, {}]
 
     return render(request, 'app/home.html', context=context_dict)
+
 class SearchView(View):
     def get(self, request):
-        a = [0 for x in range(36)]
-        context_dict = {'items' : a}
+        items = []
+        for i in range(99):
+            items.append(i)
+
+        default_page = 1
+        page = request.GET.get('page', default_page)
+
+        # Paginate items
+        items_per_page = 9
+        paginator = Paginator(items, items_per_page)
+        try:
+            items_page = paginator.page(page)
+        except PageNotAnInteger:
+            items_page = paginator.page(default_page)
+        except EmptyPage:
+            items_page = paginator.page(paginator.num_pages)
+        print(items_page)
+        context_dict = { 'items_page': items_page}
         return render(request, 'app/search.html', context=context_dict)
 
 class LoginView(View):
