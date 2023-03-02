@@ -23,27 +23,6 @@
             <div class="col-md-4">{% include 'component/card.html' %}</div>
             {% endfor %}
             {% if items_page.has_other_pages %}
-            <!-- <div class="btn-group" role="group" aria-label="Item pagination">
-                {% if items_page.has_previous %}
-                <a href="?page={{ items_page.previous_page_number }}" class="btn btn-outline-primary">&laquo;</a>
-                {% endif %}
-
-                {% for page_number in items_page.paginator.page_range %}
-                {% if items_page.number == page_number %}
-                <button class="btn btn-outline-primary active">
-                    <span>{{ page_number }} <span class="sr-only">(current)</span></span>
-                </button>
-                {% else %}
-                <a href="?page={{ page_number }}" class="btn btn-outline-primary">
-                    {{ page_number }}
-                </a>
-                {% endif %}
-                {% endfor %}
-
-                {% if items_page.has_next %}
-                <a href="?page={{ items_page.next_page_number }}" class="btn btn-outline-primary">&raquo;</a>
-                {% endif %}
-            </div> -->
             <div class="col-12">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
@@ -59,8 +38,11 @@
                         {% endif %}
 
                         {% for page_number in items_page.paginator.page_range %}
-                        <li class="page-item {% if items_page.number == page_number %}active{% endif %}"><a
-                                class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+                        {% if items_page.number == page_number %}
+                        <li class="page-item active"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+                        {% elif page_number > items_page.number|add:'-3' and page_number < items_page.number|add:'3' %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+                        {% endif %}
                         {% endfor %}
 
                         {% if items_page.has_next %}
