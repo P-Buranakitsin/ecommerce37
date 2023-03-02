@@ -1,7 +1,18 @@
 {% extends 'app/base.html' %}
 {% load staticfiles %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/logout.css" %}" />
+{% endblock %}
 {% block title_block %}Logout{% endblock %}
 {% block body_block %}
-    <h1>Logged Out</h1>
+    <header>
+        <h1>Logged Out</h1>
+    </header>
+    <div class="header">
+        <div class="logout">
+            <a href="{% url 'registration_register' %}">Register</a>
+            <a href="{% url 'registration_login' %}">Login</a>
+        </div>
+    </div>
     <p>You have been successfully logged out. Thanks for spending time on our app!</p>
 {% endblock %}
