@@ -21,7 +21,7 @@ def home(request):
 class SearchView(View):
     def get(self, request):
         items = []
-        for i in range(99):
+        for i in range(12):
             items.append(i)
 
         default_page = 1
@@ -36,11 +36,11 @@ class SearchView(View):
             items_page = paginator.page(default_page)
         except EmptyPage:
             items_page = paginator.page(paginator.num_pages)
-        print(items_page)
+
         context_dict = { 'items_page': items_page}
         return render(request, 'app/search.html', context=context_dict)
 
-class LoginView(View):
+class UserLoginView(View):
     def get(self, request):
         form = LoginUserForm()
         context = { 'form': form}
