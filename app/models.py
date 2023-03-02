@@ -19,3 +19,33 @@ class User(models.Model):
 
     def __str__(self):
         return self.user_id
+
+class Commodities(models.Model):
+    c_id = models.CharField(primary_key=True, max_length=20)
+    c_name = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    image = models.ImageField(upload_to='commodities/', blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    #type
+    #inventory
+
+    def __str__(self):
+        return self.c_id
+
+class ShoppingCart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    commodities = models.ForeignKey(Commodities, on_delete=models.CASCADE)
+    amount = models.ImageField(default=1)
+"""
+    def __init__(self, *args, **kwargs):
+        self.items = []
+        self.total_price = 0
+
+    def add_commodities(self, commodities):
+        self.price += commodities.price
+        for item in self.items:
+            if item.commodities.c_id == commodities.c_id:
+                item.amount += 1
+                return
+        self.items.append()
+"""

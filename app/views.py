@@ -1,8 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views import View
-from app.models import UserProfile
+from app.models import UserProfile, ShoppingCart, Commodities
 from app.forms import CreateUserForm, LoginUserForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -60,3 +61,41 @@ def test(request):
 def logout(request):
     logout(request)
     return redirect('home')
+
+#ShoppingCart
+@login_required
+def viewShoppingCart(request):
+    items = ShoppingCart.objects.filter(user = request.user)
+    price = 0
+    for item in items:
+        price += item.commodities.price * ShoppingCart.amount
+        context = {
+            'items': items,
+            'price': price
+        }
+    return render(request, 'users/cart.html', context)
+    #return HttpResponse('1')
+
+@login_required
+def addShoppingCart(request, c_id):
+    c = Commodities.objects.get(c_id = c_id)
+    shoppingCart, created = ShoppingCart.objects.get_or_create(
+        user=request.user,
+        commodities=c,
+        defaults={'amount': 1}
+    )
+    if not created:
+        shoppingCart.quantity += 1
+        shoppingCart.save()
+    return redirect('')
+
+@login_required
+def removeShoppingCart(request, c_id):
+    '''
+    shoppingCart = request.session.get('cart', {})
+    ShoppingCart.remove()
+    '''
+    shoppingCart = ShoppingCart(request)
+    commodities = get_object_or_404(Commodities, c_id=c_id)
+    shoppingCart.remove(commodities)
+    return redirect('cart')
