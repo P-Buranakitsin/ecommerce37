@@ -39,7 +39,7 @@ class SearchView(View):
 
         context_dict = { 'items_page': items_page}
         return render(request, 'app/search.html', context=context_dict)
-
+    
 class UserLoginView(View):
     def get(self, request):
         form = LoginUserForm()
@@ -57,6 +57,12 @@ class UserLoginView(View):
 
         context = { 'form': form}
         return render(request, 'app/login.html',context)
+    
+class CommodityView(View):
+    def get(self, request, c_id):
+        print(c_id)
+
+        return render(request, 'app/commodity.html', context={})
         
 def register(request):
     form = CreateUserForm()
