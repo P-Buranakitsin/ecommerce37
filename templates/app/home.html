@@ -1,6 +1,6 @@
 {% extends 'app/baseWithFootNav.html' %}
 {% load staticfiles %}
-{% block css %}
+{% block css_extend %}
     <link rel="stylesheet" href="{% static "css/home.css" %}" />
 {% endblock %}
 {% block title_block %}Homepage{% endblock %}
@@ -26,7 +26,7 @@
                     <p class="lead text-muted">Best selling items</p>
                 </div>
                 {% if most_popular_items %}
-                    {% for popular_item in most_popular_items %}
+                    {% for item in most_popular_items %}
                         <div class="col-md-4">{% include 'component/card.html' %}</div>
                     {% endfor %}
                 {% endif %}
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 {% if other_items %}
-                    {% for other_item in other_items %}
+                    {% for item in other_items %}
                         <div class="col-md-4">{% include 'component/card.html' %}</div>
                     {% endfor %}
                 {% endif %}

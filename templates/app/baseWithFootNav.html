@@ -1,5 +1,9 @@
 {% extends 'app/base.html' %}
 {% load staticfiles %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/baseWithFootNav.css" %}" />
+    {% block css_extend %}{% endblock %}
+{% endblock %}
 {% block navbar %}
     <header class="sticky-top">
         <div class="navbar navbar-expand-lg  navbar-dark bg-primary shadow-sm">
@@ -45,20 +49,28 @@
                         </li>
                     </ul>
                     <form class="form-inline">
-                        <a class="btn btn-outline-light my-2 my-sm-0 mr-4"
-                           href="{% url 'app:login' %}">Log in</a>
-                        <a class="btn btn-outline-light my-2 my-sm-0"
-                           href="{% url 'app:register' %}">Register</a>
-                    </form>
-                </div>
-            </div>
+                        {% if user.is_authenticated == True %}
+                        <a class="btn btn-outline-light my-2 my-sm-0 mr-4 position-relative" href="">Cart <span data-feather="shopping-cart"></span>
+                        <div class="shopping-cart-count">5</div>
+                    </a>
+                    <a class="btn btn-outline-light my-2 my-sm-0 mr-4" href="">Profile</a>
+                    <a class="btn btn-outline-light my-2 my-sm-0 mr-4" href="">Log out</a>
+                {% else %}
+                    <a class="btn btn-outline-light my-2 my-sm-0 mr-4"
+                       href="{% url 'app:login' %}">Log in</a>
+                    <a class="btn btn-outline-light my-2 my-sm-0"
+                       href="{% url 'app:register' %}">Register</a>
+                {% endif %}
+            </form>
         </div>
-    </header>
+    </div>
+</div>
+</header>
 {% endblock %}
 {% block footer %}
-<footer class="text-muted bg-light mt-auto">
-    <div class="container">
-        <p class="">© Company Inc. 2023. We love our users!</p>
-    </div>
-</footer>
+    <footer class="text-muted bg-light mt-auto">
+        <div class="container">
+            <p class="">© Company Inc. 2023. We love our users!</p>
+        </div>
+    </footer>
 {% endblock %}

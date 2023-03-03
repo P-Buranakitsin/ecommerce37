@@ -13,8 +13,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def home(request):
     context_dict = {}
-    context_dict['most_popular_items'] = [{}, {}, {}]
-    context_dict['other_items'] = [{}, {}, {}, {}, {}, {}]
+    context_dict['most_popular_items'] = [0, 1, 2]
+    context_dict['other_items'] = [0, 1, 2, 3, 4, 5]
 
     return render(request, 'app/home.html', context=context_dict)
 
