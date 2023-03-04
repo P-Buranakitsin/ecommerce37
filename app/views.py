@@ -61,8 +61,18 @@ class UserLoginView(View):
 class CommodityView(View):
     def get(self, request, c_id):
         print(c_id)
+        context_dict={}
+        context_dict['related_items'] = [0, 1, 2]
+        context_dict['c_id'] = c_id
 
-        return render(request, 'app/commodity.html', context={})
+        return render(request, 'app/commodity.html', context=context_dict)
+    
+    def post(self, request, c_id):
+        print(request.POST.get('inputQuantity'))
+        context_dict={}
+        context_dict['related_items'] = [0, 1, 2]
+
+        return render(request, 'app/commodity.html', context=context_dict)
         
 def register(request):
     form = CreateUserForm()

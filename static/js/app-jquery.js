@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var pathname = $(location).attr('pathname')
+    let pathname = $(location).attr('pathname')
     if (pathname === "/") {
         $('#nav-link-home').addClass('active')
     } else if (pathname === "/search/") {
