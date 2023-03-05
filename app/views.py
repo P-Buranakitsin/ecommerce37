@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordChangeForm
 
 # Create your views here.
 
@@ -81,12 +82,20 @@ class ProfileView(View):
         return
 
     def get(self, request):
-        context_dict = {}
+        form = PasswordChangeForm(request.user)
+        context_dict = {'form': form}
         
         return render(request, 'app/profile.html', context_dict)
     
     def post(self, request):
-        context_dict = {}
+        form = PasswordChangeForm(request.user, request.POST)
+
+        if form.is_valid():
+            form.save(commit=False)
+        else:
+            print(form.errors)
+
+        context_dict = {'form' : form}
         
         return render(request, 'app/profile.html', context_dict)
 
