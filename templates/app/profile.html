@@ -5,5 +5,26 @@
 {% endblock %}
 {% block title_block %}Profile{% endblock %}
 {% block body_block %}
-
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <nav>
+                        <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                          {% comment %} <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a> {% endcomment %}
+                          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+                          <a class="nav-item nav-link" id="nav-billing-tab" data-toggle="tab" href="#nav-billing" role="tab" aria-controls="nav-billing" aria-selected="false">Billing</a>
+                          <a class="nav-item nav-link" id="nav-security-tab" data-toggle="tab" href="#nav-security" role="tab" aria-controls="nav-security" aria-selected="false">Security</a>
+                        </div>
+                      </nav>
+                      <div class="tab-content" id="nav-tabContent">
+                        {% comment %} <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div> {% endcomment %}
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Profile</div>
+                        <div class="tab-pane fade" id="nav-billing" role="tabpanel" aria-labelledby="nav-billing-tab">Billing</div>
+                        <div class="tab-pane fade" id="nav-security" role="tabpanel" aria-labelledby="nav-security-tab">Security</div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
