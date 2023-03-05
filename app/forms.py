@@ -7,7 +7,8 @@ class CreateUserForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-class LoginUserForm(AuthenticationForm):
+class UserLoginForm(AuthenticationForm):
 
     class Meta:
         model = User
+        fields = '__all__'

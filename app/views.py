@@ -4,14 +4,16 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views import View
 from app.models import UserProfile, ShoppingCart, Commodities
-from app.forms import CreateUserForm, LoginUserForm
+from app.forms import CreateUserForm, UserLoginForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.models import User
 
 # Create your views here.
 
 def home(request):
+    print(User.objects.all())
     context_dict = {}
     context_dict['most_popular_items'] = [0, 1, 2]
     context_dict['other_items'] = [0, 1, 2, 3, 4, 5]
@@ -42,12 +44,12 @@ class SearchView(View):
     
 class UserLoginView(View):
     def get(self, request):
-        form = LoginUserForm()
+        form = UserLoginForm()
         context = { 'form': form}
         return render(request, 'app/login.html',context)
 
     def post(self, request):
-        form = LoginUserForm(request.POST)
+        form = UserLoginForm(request.POST)
 
         if form.is_valid():
             login(request, form)
@@ -73,6 +75,15 @@ class CommodityView(View):
         context_dict['related_items'] = [0, 1, 2]
 
         return render(request, 'app/commodity.html', context=context_dict)
+    
+class ProfileView(View):
+    def get_user_details(self):
+        return
+
+    def get(self, request):
+        context_dict = {}
+        
+        return render(request, 'app/profile.html', context_dict)
         
 def register(request):
     form = CreateUserForm()

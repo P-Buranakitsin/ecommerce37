@@ -49,12 +49,12 @@
                         </li>
                     </ul>
                     <form class="form-inline">
-                        {% if user.is_authenticated == True %}
+                        {% if user.is_authenticated == False %}
                         <a class="btn btn-outline-light my-2 my-sm-0 mr-4 position-relative"
                            href="">Cart <span data-feather="shopping-cart"></span>
                         <div class="shopping-cart-count">5</div>
                     </a>
-                    <a class="btn btn-outline-light my-2 my-sm-0 mr-4" href="">Profile</a>
+                    <a class="btn btn-outline-light my-2 my-sm-0 mr-4" href="{% url 'app:profile' %}">Profile</a>
                     <a class="btn btn-outline-light my-2 my-sm-0 mr-4" href="">Log out</a>
                 {% else %}
                     <a class="btn btn-outline-light my-2 my-sm-0 mr-4"
