@@ -84,7 +84,12 @@ class ProfileView(View):
         context_dict = {}
         
         return render(request, 'app/profile.html', context_dict)
+    
+    def post(self, request):
+        context_dict = {}
         
+        return render(request, 'app/profile.html', context_dict)
+
 def register(request):
     form = CreateUserForm()
     if request.method == 'POST':
