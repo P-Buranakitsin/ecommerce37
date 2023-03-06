@@ -10,7 +10,7 @@ form {
 }
 label {
   display: inline-block;
-  width: 50px;
+  width: 80px;
   text-align: right;
 }
 input,
@@ -29,7 +29,7 @@ textarea {
 
 .main-container {
   margin: 0 auto;
-  width: 300px;
+  width: 400px;
   padding: 4em;
   border: 2px solid #34b260;
   border-radius: 1em;
@@ -42,6 +42,8 @@ header img {
 }
 .footer-text {
   text-align: center;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 .footer-text a {
   color: #7950d9;
