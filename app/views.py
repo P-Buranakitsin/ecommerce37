@@ -82,8 +82,25 @@ class ProfileView(View):
         return
 
     def get(self, request):
+        items = []
+        for i in range(12):
+            items.append(i)
+
+        default_page = 1
+        page = request.GET.get('page', default_page)
+
+        # Paginate items
+        items_per_page = 4
+        paginator = Paginator(items, items_per_page)
+        try:
+            items_page = paginator.page(page)
+        except PageNotAnInteger:
+            items_page = paginator.page(default_page)
+        except EmptyPage:
+            items_page = paginator.page(paginator.num_pages)
+
         form = PasswordChangeForm(request.user)
-        context_dict = {'form': form}
+        context_dict = {'form': form, 'items_page': items_page}
         
         return render(request, 'app/profile.html', context_dict)
     
