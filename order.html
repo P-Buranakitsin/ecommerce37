@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Place Your Order</h1>
+  <form id="order-form" method="POST" action="{% url 'order' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Place Order</button>
+  </form>
+{% endblock %}
+
+{% block js %}
+  <script src="{% static 'js/order.js' %}"></script>
+{% endblock %}
+
