@@ -30,7 +30,7 @@ commodity1 = Commodities.objects.create(
     c_name='Orange',
     price=10.00,
     description='This is the description for Orange.',
-    image='static/images/Commodities/Orange.png',
+    image='images/Commodities/Orange.png',
     type=t2,
 )
 
@@ -39,7 +39,7 @@ commodity2 = Commodities.objects.create(
     c_name='Cherry',
     price=10.00,
     description='This is the description for Cherry.',
-    image='static/images/Commodities/Cherry.png',
+    image='images/Commodities/Cherry.png',
     type=t2,
 )
 
@@ -48,7 +48,7 @@ commodity3 = Commodities.objects.create(
     c_name='Headphone',
     price=49.99,
     description='This is the description for Headphone.',
-    image='static/images/Commodities/Headphone.png',
+    image='images/Commodities/Headphone.png',
     type=t1,
 )
 
@@ -57,7 +57,7 @@ commodity4 = Commodities.objects.create(
     c_name='iPhone8',
     price=154.99,
     description='Apple iPhone 8, 64GB, Red (Renewed).',
-    image='static/images/Commodities/iPhone8.png',
+    image='images/Commodities/iPhone8.png',
     type=t1,
 )
 
@@ -66,7 +66,7 @@ commodity5 = Commodities.objects.create(
     c_name='Cleanser',
     price=4.99,
     description='CeraVe Hydrating Cleanser for Normal to Dry Skin 473ml with Hyaluronic Acid & 3 Essential Ceramides.',
-    image='static/images/Commodities/Cleanser.png',
+    image='images/Commodities/Cleanser.png',
     type=t3,
 )
 
@@ -75,7 +75,7 @@ commodity6 = Commodities.objects.create(
     c_name='T-Shirt',
     price=20.99,
     description='',
-    image='static/images/Commodities/T-Shirt.png',
+    image='images/Commodities/T-Shirt.png',
     type=t3,
 )
 
