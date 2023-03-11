@@ -12,16 +12,6 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
-
-
-class User(models.Model):
-    user_id = models.CharField(primary_key=True, max_length=20)
-    username = models.CharField(max_length=200, blank=True)
-    user_email = models.EmailField(unique=True)
-    #password =
-
-    def __str__(self):
-        return self.user_id
 class Type(models.Model):
     name = models.CharField(max_length=255, unique=True)
     description = models.TextField(blank=True)
@@ -39,6 +29,8 @@ class Commodities(models.Model):
     description = models.TextField(blank=True, null=True)
     type = models.ForeignKey(Type, on_delete=models.CASCADE)
     #inventory
+    class Meta:
+        verbose_name_plural = 'commodities'
 
     def __str__(self):
         return self.c_name

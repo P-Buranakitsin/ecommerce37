@@ -3,7 +3,5 @@ from app.models import UserProfile, User, Commodities
 
 # Register your models here.
 admin.site.register(UserProfile)
-
-admin.site.register(User)
 admin.site.register(Commodities)
 
