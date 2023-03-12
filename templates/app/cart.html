@@ -1,7 +1,30 @@
 {% extends 'app/baseWithFootNav.html' %}
 {% load staticfiles %}
 {% block css_extend %}
-    <link rel="stylesheet" href="{% static "css/cart.css" %}" />
+    <link rel="stylesheet" href="{% static " css/cart.css" %}" />
 {% endblock %}
 {% block title_block %}Contact Us{% endblock %}
-{% block body_block %}{% endblock %}
+{% block body_block %}
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="align-middle">Product Name</th>
+                                    <th class="text-center align-middle">Quantity</th>
+                                    <th class="text-center align-middle">Subtotal</th>
+                                    <th class="text-center">
+                                        <a class="btn btn-sm btn-outline-danger" href="#">Clear Cart</a>
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
