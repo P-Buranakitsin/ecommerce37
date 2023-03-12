@@ -45,11 +45,11 @@
                             <a class="nav-link" id="nav-link-search" href="{% url 'app:search' %}">Search</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="nav-link-contact-us" href="{% url 'app:home' %}">Contact Us</a>
+                            <a class="nav-link" id="nav-link-contact-us" href="{% url 'app:contactUs' %}">Contact Us</a>
                         </li>
                     </ul>
                     <form class="form-inline">
-                        {% if user.is_authenticated == False %}
+                        {% if user.is_authenticated == True %}
                         <a class="btn btn-outline-light my-2 my-sm-0 mr-4 position-relative"
                            href="">Cart <span data-feather="shopping-cart"></span>
                         <div class="shopping-cart-count">5</div>

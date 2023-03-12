@@ -2,8 +2,10 @@ $(document).ready(function() {
     let pathname = $(location).attr('pathname')
     if (pathname === "/") {
         $('#nav-link-home').addClass('active')
-    } else if (pathname === "/search/") {
+    } else if (pathname.includes("/search/")) {
         $('#nav-link-search').addClass('active')
+    } else if (pathname.includes("/contactUs/")) {
+        $('#nav-link-contact-us').addClass('active')
     } else {
         $('.nav-link').removeClass('active')
     }

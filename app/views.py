@@ -77,20 +77,25 @@ class CommodityView(View):
 
         return render(request, 'app/commodity.html', context=context_dict)
     
+class ContactUsView(View):
+    def get(self, request):
+        context_dict={}
+        return render(request, 'app/contactUs.html', context_dict)
+    
 class ProfileView(View):
     def get_user_details(self):
         return
 
     def get(self, request):
         items = []
-        for i in range(12):
+        for i in range(3):
             items.append(i)
 
         default_page = 1
         page = request.GET.get('page', default_page)
 
         # Paginate items
-        items_per_page = 4
+        items_per_page = 999
         paginator = Paginator(items, items_per_page)
         try:
             items_page = paginator.page(page)
