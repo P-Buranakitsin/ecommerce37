@@ -82,6 +82,11 @@ class ContactUsView(View):
         context_dict={}
         return render(request, 'app/contactUs.html', context_dict)
     
+class CartView(View):
+    def get(self, request):
+        context_dict={}
+        return render(request, 'app/cart.html', context_dict)
+
 class ProfileView(View):
     def get_user_details(self):
         return
@@ -144,18 +149,18 @@ def logout(request):
     return redirect('home')
 
 #ShoppingCart
-@login_required
-def viewShoppingCart(request):
-    items = ShoppingCart.objects.filter(user = request.user)
-    price = 0
-    for item in items:
-        price += item.commodities.price * ShoppingCart.amount
-        context = {
-            'items': items,
-            'price': price
-        }
-    return render(request, 'users/cart.html', context)
-    #return HttpResponse('1')
+# @login_required
+# def viewShoppingCart(request):
+#     items = ShoppingCart.objects.filter(user = request.user)
+#     price = 0
+#     for item in items:
+#         price += item.commodities.price * ShoppingCart.amount
+#         context = {
+#             'items': items,
+#             'price': price
+#         }
+#     return render(request, 'users/cart.html', context)
+#     #return HttpResponse('1')
 
 @login_required
 def addShoppingCart(request, c_id):
