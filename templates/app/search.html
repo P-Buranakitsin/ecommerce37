@@ -1,7 +1,7 @@
 {% extends 'app/baseWithFootNav.html' %}
 {% load staticfiles %}
-{% block css %}
-<link rel="stylesheet" href="{% static " css/search.css" %}" />
+{% block css_extend %}
+    <link rel="stylesheet" href="{% static "css/search.css" %}" />
 {% endblock %}
 {% block title_block %}Search{% endblock %}
 {% block body_block %}

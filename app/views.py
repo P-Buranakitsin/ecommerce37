@@ -4,14 +4,17 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views import View
 from app.models import UserProfile, ShoppingCart, Commodities
-from app.forms import CreateUserForm, LoginUserForm
+from app.forms import CreateUserForm, UserLoginForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordChangeForm
 
 # Create your views here.
 
 def home(request):
+    print(User.objects.all())
     context_dict = {}
     context_dict['most_popular_items'] = [0, 1, 2]
     context_dict['other_items'] = [0, 1, 2, 3, 4, 5]
@@ -42,12 +45,12 @@ class SearchView(View):
     
 class UserLoginView(View):
     def get(self, request):
-        form = LoginUserForm()
+        form = UserLoginForm()
         context = { 'form': form}
         return render(request, 'app/login.html',context)
 
     def post(self, request):
-        form = LoginUserForm(request.POST)
+        form = UserLoginForm(request.POST)
 
         if form.is_valid():
             login(request, form)
@@ -73,7 +76,56 @@ class CommodityView(View):
         context_dict['related_items'] = [0, 1, 2]
 
         return render(request, 'app/commodity.html', context=context_dict)
+    
+class ContactUsView(View):
+    def get(self, request):
+        context_dict={}
+        return render(request, 'app/contactUs.html', context_dict)
+    
+class CartView(View):
+    def get(self, request):
+        context_dict={}
+        return render(request, 'app/cart.html', context_dict)
+
+class ProfileView(View):
+    def get_user_details(self):
+        return
+
+    def get(self, request):
+        items = []
+        for i in range(3):
+            items.append(i)
+
+        default_page = 1
+        page = request.GET.get('page', default_page)
+
+        # Paginate items
+        items_per_page = 999
+        paginator = Paginator(items, items_per_page)
+        try:
+            items_page = paginator.page(page)
+        except PageNotAnInteger:
+            items_page = paginator.page(default_page)
+        except EmptyPage:
+            items_page = paginator.page(paginator.num_pages)
+
+        form = PasswordChangeForm(request.user)
+        context_dict = {'form': form, 'items_page': items_page}
         
+        return render(request, 'app/profile.html', context_dict)
+    
+    def post(self, request):
+        form = PasswordChangeForm(request.user, request.POST)
+
+        if form.is_valid():
+            form.save(commit=False)
+        else:
+            print(form.errors)
+
+        context_dict = {'form' : form}
+        
+        return render(request, 'app/profile.html', context_dict)
+
 def register(request):
     form = CreateUserForm()
     if request.method == 'POST':
@@ -97,18 +149,18 @@ def logout(request):
     return redirect('home')
 
 #ShoppingCart
-@login_required
-def viewShoppingCart(request):
-    items = ShoppingCart.objects.filter(user = request.user)
-    price = 0
-    for item in items:
-        price += item.commodities.price * ShoppingCart.amount
-        context = {
-            'items': items,
-            'price': price
-        }
-    return render(request, 'users/cart.html', context)
-    #return HttpResponse('1')
+# @login_required
+# def viewShoppingCart(request):
+#     items = ShoppingCart.objects.filter(user = request.user)
+#     price = 0
+#     for item in items:
+#         price += item.commodities.price * ShoppingCart.amount
+#         context = {
+#             'items': items,
+#             'price': price
+#         }
+#     return render(request, 'users/cart.html', context)
+#     #return HttpResponse('1')
 
 @login_required
 def addShoppingCart(request, c_id):

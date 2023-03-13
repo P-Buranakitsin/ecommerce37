@@ -1,0 +1,9 @@
+.card:not([class*="bg-"]) .card-header {
+  color: #0061f2;
+}
+.card .card-header {
+  font-weight: 500;
+}
+.img-account-profile {
+  height: 10rem;
+}
