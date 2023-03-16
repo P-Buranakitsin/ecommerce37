@@ -85,6 +85,7 @@ class ContactUsView(View):
 class CartView(View):
     def get(self, request):
         context_dict={}
+        context_dict['cart_items'] = [0, 1, 2]
         return render(request, 'app/cart.html', context_dict)
 
 class ProfileView(View):

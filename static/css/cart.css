@@ -1,8 +1,8 @@
 body{margin-top:20px;}
-select.form-control:not([size]):not([multiple]) {
+input.form-control:not([size]):not([multiple]) {
     height: 44px;
 }
-select.form-control {
+input.form-control {
     padding-right: 38px;
     background-position: center right 17px;
     background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNv…9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);
