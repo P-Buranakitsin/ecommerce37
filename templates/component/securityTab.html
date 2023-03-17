@@ -3,7 +3,7 @@
         <div class="card mb-4">
             <div class="card-header">Change Password</div>
             <div class="card-body">
-                <form method="post" action="." >
+                <form method="post" action="{% url 'app:change_password' %}" >
                     {% csrf_token %}
                     <!-- Form Group (current password)-->
                     <div class="mb-3">

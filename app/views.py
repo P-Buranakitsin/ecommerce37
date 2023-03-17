@@ -5,7 +5,7 @@ from django.views import View
 from app.models import UserProfile, ShoppingCart, Commodities
 from app.forms import UserRegisterForm, UserProfileForm
 from django.contrib import messages
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, update_session_auth_hash
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm
@@ -94,6 +94,24 @@ class UserLogoutView(View):
     def get(self, request):
         logout(request)
         return redirect(reverse('app:home'))
+    
+class ChangePasswordView(View):
+    # def get(self, request):
+    #     form = PasswordChangeForm(request.user)
+    #     context = { 'form': form}
+    #     return render(request, 'app/home.html',context)
+
+    def post(self, request):
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return redirect(reverse('app:home'))
+        else:
+            print(form.errors)
+
+        context = { 'form': form}
+        return render(request, 'app/profile.html',context)
     
 class CommodityView(View):
     def get(self, request, c_id):
