@@ -94,24 +94,6 @@ class UserLogoutView(View):
         logout(request)
         return redirect(reverse('app:home'))
     
-class ChangePasswordView(View):
-    # def get(self, request):
-    #     form = PasswordChangeForm(request.user)
-    #     context = { 'form': form}
-    #     return render(request, 'app/home.html',context)
-    @method_decorator(login_required)
-    def post(self, request):
-        form = PasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)
-            return redirect(reverse('app:home'))
-        else:
-            print(form.errors)
-
-        context = { 'form': form, 'active_tab': 'security'}
-        return render(request, 'app/profile.html',context)
-    
 class CommodityView(View):
     def get(self, request, c_id):
         print(c_id)
@@ -179,6 +161,19 @@ class ProfileView(View):
         context_dict = {'form': form, 'items_page': items_page, 'user_profile': user_profile, 'selected_user': user, 'active_tab': 'profile'}
         
         return render(request, 'app/profile.html', context_dict)
+    
+    @method_decorator(login_required)
+    def post(self, request, username):
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return redirect(reverse('app:home'))
+        else:
+            print(form.errors)
+
+        context = { 'form': form, 'active_tab': 'security'}
+        return render(request, 'app/profile.html',context)
 
 
 def register(request):
