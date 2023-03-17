@@ -1,12 +1,11 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views import View
 from app.models import UserProfile, ShoppingCart, Commodities
-from app.forms import CreateUserForm
+from app.forms import UserRegisterForm, UserProfileForm
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm
@@ -60,6 +59,36 @@ class UserLoginView(View):
 
         context = { 'form': form}
         return render(request, 'app/login.html',context)
+    
+class UserRegisterView(View):
+    def get(self, request):
+        user_form = UserRegisterForm()
+        profile_form = UserProfileForm()
+        context = {'user_form': user_form, 'profile_form': profile_form}
+        return render(request, 'app/register.html', context)
+    
+    def post(self, request):
+        user_form = UserRegisterForm(request.POST)
+        profile_form = UserProfileForm(request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+
+            if 'picture' in request.FILES:
+                profile.picture = request.FILES['picture']
+            profile.save()
+
+            return redirect(reverse('app:home'))
+        else:
+            print(user_form.errors, profile_form.errors)       
+
+        context = {'user_form': user_form, 'profile_form': profile_form}
+        return render(request, 'app/register.html', context)
+
     
 class UserLogoutView(View):
     def get(self, request):
@@ -131,6 +160,7 @@ class ProfileView(View):
         context_dict = {'form' : form}
         
         return render(request, 'app/profile.html', context_dict)
+
 
 def register(request):
     form = CreateUserForm()

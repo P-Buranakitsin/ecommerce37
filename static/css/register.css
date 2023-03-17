@@ -52,10 +52,20 @@ header img {
 
 main {
   background: #e9ecef;
-  mini-height: 100vh;
+  height: 100vh;
+}
+
+body {
+  background-color: #e9ecef !important;
 }
 
 .main-container {
   background: #fff;
   
+}
+
+.form-control-file {
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
 }
