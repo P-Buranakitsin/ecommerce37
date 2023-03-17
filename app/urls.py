@@ -12,6 +12,7 @@ urlpatterns = [
     path('commodity/<slug:c_id>/', views.CommodityView.as_view(), name='commodity'),
     path('profile/', views.ProfileView.as_view(), name='profile'),
     path('contactUs/', views.ContactUsView.as_view(), name='contactUs'),
-    path('cart/', views.CartView.as_view(), name='cart')
+    path('cart/', views.CartView.as_view(), name='cart'),
+    path('logout/', views.UserLogoutView.as_view(), name='logout'),
 ]
 

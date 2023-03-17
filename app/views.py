@@ -61,6 +61,11 @@ class UserLoginView(View):
         context = { 'form': form}
         return render(request, 'app/login.html',context)
     
+class UserLogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect(reverse('app:home'))
+    
 class CommodityView(View):
     def get(self, request, c_id):
         print(c_id)
@@ -141,13 +146,6 @@ def register(request):
         context = {'form': form}
     return render(request, 'app/register.html', context)
     #return HttpResponse('2')
-
-def test(request):
-    return HttpResponse('Homepage')
-
-def logout(request):
-    logout(request)
-    return redirect('home')
 
 #ShoppingCart
 # @login_required
