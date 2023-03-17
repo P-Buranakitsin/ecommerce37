@@ -5,32 +5,34 @@
 {% endblock %}
 {% block title_block %}Login{% endblock %}
 {% block body_block %}
-    <div class="main-container">
-        <h1>Log in</h1>
-        <form method="post" action=".">
-            {% csrf_token %}
-            <legend style="font-size: 2em;margin-bottom: 15px;white-space: normal;">
-                <span style="display: block;">Welcome back!</span>
-            </legend>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Username</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
-              </div>
-              <div class="form-group">
-                <input type="checkbox" name="donotcache" value="1">
-                Don't cache my password
+    <div class="container h-100">
+        <div class="row h-100 align-items-center justify-content-center">
+            <div class="col-md-6">
+                <form method="post" action=".">
+                    <h1>Log in</h1>
+                    {% csrf_token %}
+                    <legend style="font-size: 2em;margin-bottom: 15px;white-space: normal;">
+                        <span style="display: block;">Welcome back!</span>
+                    </legend>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Username</label>
+                        <input type="email"
+                               class="form-control"
+                               id="exampleInputEmail1"
+                               aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <input type="submit" value="Log In" class="btn btn-primary" />
+                    <p class="footer-text">
+                        Not registered?
+                        <a href="{% url 'app:register' %}">Register here!</a>
+                    </p>
+                    <input type="hidden" name="next" value="{{ next }}" />
+                </form>
             </div>
-              
-            <input type="submit" value="Log In" class="btn btn-primary" />
-            <p class="footer-text">
-                Not registered?
-                <a href="{% url 'app:register' %}">Register here!</a>
-            </p>
-            <input type="hidden" name="next" value="{{ next }}" />
-        </form>
+        </div>
     </div>
 {% endblock %}

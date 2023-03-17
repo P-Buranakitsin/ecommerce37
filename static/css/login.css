@@ -27,8 +27,8 @@ textarea {
 }
 
 .main-container {
-  margin: 100px auto;
-  width: 400px;
+  margin: 0px auto;
+  max-width: 400px;
   padding: 4em;
   border: 2px solid #595a5c;
   border-radius: 1em;
