@@ -4,12 +4,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views import View
 from app.models import UserProfile, ShoppingCart, Commodities
-from app.forms import CreateUserForm, UserLoginForm
+from app.forms import CreateUserForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm
 
 # Create your views here.
 
@@ -45,15 +45,15 @@ class SearchView(View):
     
 class UserLoginView(View):
     def get(self, request):
-        form = UserLoginForm()
+        form = AuthenticationForm(request)
         context = { 'form': form}
         return render(request, 'app/login.html',context)
 
     def post(self, request):
-        form = UserLoginForm(request.POST)
-
+        form = AuthenticationForm(request, request.POST)
         if form.is_valid():
-            login(request, form)
+            user = form.get_user()
+            login(request, user)
             return redirect(reverse('app:home'))
         else:
             print(form.errors)

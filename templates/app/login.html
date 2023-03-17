@@ -15,16 +15,31 @@
                         <span style="display: block;">Welcome back!</span>
                     </legend>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Username</label>
-                        <input type="email"
+                        <label for="id_username" class="form-label">Username</label>
+                        <input type="text"
+                               name="username"
                                class="form-control"
-                               id="exampleInputEmail1"
-                               aria-describedby="emailHelp">
+                               autofocus=""
+                               required=""
+                               id="id_username">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <label for="id_password" class="form-label">Password</label>
+                        <input type="password"
+                               class="form-control"
+                               name="password"
+                               required=""
+                               id="id_password">
                     </div>
+                    {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            <ul>
+                                {% for field, errors in form.errors.items %}
+                                    {% for error in errors %}<li>{{ error }}</li>{% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
                     <input type="submit" value="Log In" class="btn btn-primary" />
                     <p class="footer-text">
                         Not registered?
