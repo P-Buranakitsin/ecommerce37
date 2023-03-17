@@ -9,15 +9,14 @@ from django.contrib.auth import login, logout, update_session_auth_hash
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 
 def home(request):
-    print(User.objects.all())
     context_dict = {}
     context_dict['most_popular_items'] = [0, 1, 2]
     context_dict['other_items'] = [0, 1, 2, 3, 4, 5]
-
     return render(request, 'app/home.html', context=context_dict)
 
 class SearchView(View):
@@ -100,7 +99,7 @@ class ChangePasswordView(View):
     #     form = PasswordChangeForm(request.user)
     #     context = { 'form': form}
     #     return render(request, 'app/home.html',context)
-
+    @method_decorator(login_required)
     def post(self, request):
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
@@ -110,7 +109,7 @@ class ChangePasswordView(View):
         else:
             print(form.errors)
 
-        context = { 'form': form}
+        context = { 'form': form, 'active_tab': 'security'}
         return render(request, 'app/profile.html',context)
     
 class CommodityView(View):
@@ -141,10 +140,19 @@ class CartView(View):
         return render(request, 'app/cart.html', context_dict)
 
 class ProfileView(View):
-    def get_user_details(self):
-        return
+    def get_user_details(self, username):
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return None
+        
+        user_profile = UserProfile.objects.get_or_create(user=user)[0]
+        form = UserProfileForm({'picture': user_profile.picture})
+        
+        return (user, user_profile, form)
 
-    def get(self, request):
+    @method_decorator(login_required)
+    def get(self, request, username):
         items = []
         for i in range(3):
             items.append(i)
@@ -162,20 +170,13 @@ class ProfileView(View):
         except EmptyPage:
             items_page = paginator.page(paginator.num_pages)
 
+        try:
+            (user, user_profile, form) = self.get_user_details(username)
+        except TypeError:
+            return redirect(reverse('rango:index'))
+
         form = PasswordChangeForm(request.user)
-        context_dict = {'form': form, 'items_page': items_page}
-        
-        return render(request, 'app/profile.html', context_dict)
-    
-    def post(self, request):
-        form = PasswordChangeForm(request.user, request.POST)
-
-        if form.is_valid():
-            form.save(commit=False)
-        else:
-            print(form.errors)
-
-        context_dict = {'form' : form}
+        context_dict = {'form': form, 'items_page': items_page, 'user_profile': user_profile, 'selected_user': user, 'active_tab': 'profile'}
         
         return render(request, 'app/profile.html', context_dict)
 

@@ -15,7 +15,6 @@ $(document).ready(function() {
         alert('Jquery')
     })
 
-    /* Force profile tab in profile.html to become active */
-    $('#nav-profile-tab').addClass('show active')
-    $('#nav-profile').addClass('show active')
+    /* Add class show active whenever class sohw_tab presents */
+    $('.show_tab').addClass('show active')
 });

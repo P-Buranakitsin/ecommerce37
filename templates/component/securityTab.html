@@ -3,7 +3,7 @@
         <div class="card mb-4">
             <div class="card-header">Change Password</div>
             <div class="card-body">
-                <form method="post" action="{% url 'app:change_password' %}" >
+                <form method="post" action="." >
                     {% csrf_token %}
                     <!-- Form Group (current password)-->
                     <div class="mb-3">
@@ -21,6 +21,15 @@
                         <label class="small mb-1" for="id_new_password2">Confirm Password</label>
                         <input class="form-control" type="password" placeholder="Confirm new password" name="new_password2" required="" id="id_new_password2">
                     </div>
+                    {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            <ul>
+                                {% for field, errors in form.errors.items %}
+                                    {% for error in errors %}<li>{{ error }}</li>{% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
                     <button class="btn btn-primary" type="submit">Save</button>
                 </form>
             </div>

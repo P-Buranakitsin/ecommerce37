@@ -12,20 +12,20 @@
                     <nav>
                         <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
                           {% comment %} <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a> {% endcomment %}
-                          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
-                          <a class="nav-item nav-link" id="nav-billing-tab" data-toggle="tab" href="#nav-billing" role="tab" aria-controls="nav-billing" aria-selected="false">Billing</a>
-                          <a class="nav-item nav-link" id="nav-security-tab" data-toggle="tab" href="#nav-security" role="tab" aria-controls="nav-security" aria-selected="false">Security</a>
+                          <a class="nav-item nav-link {% if active_tab == 'profile' %}show_tab{% endif %}" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+                          <a class="nav-item nav-link {% if active_tab == 'billing' %}show_tab{% endif %}" id="nav-billing-tab" data-toggle="tab" href="#nav-billing" role="tab" aria-controls="nav-billing" aria-selected="false">Billing</a>
+                          <a class="nav-item nav-link {% if active_tab == 'security' %}show_tab{% endif %}" id="nav-security-tab" data-toggle="tab" href="#nav-security" role="tab" aria-controls="nav-security" aria-selected="false">Security</a>
                         </div>
                       </nav>
                       <div class="tab-content" id="nav-tabContent">
                         {% comment %} <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div> {% endcomment %}
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="tab-pane fade {% if active_tab == 'profile' %}show_tab{% endif %}" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                             {% include 'component/profileTab.html' %}
                         </div>
-                        <div class="tab-pane fade" id="nav-billing" role="tabpanel" aria-labelledby="nav-billing-tab">
+                        <div class="tab-pane fade {% if active_tab == 'billing' %}show_tab{% endif %}" id="nav-billing" role="tabpanel" aria-labelledby="nav-billing-tab">
                             {% include 'component/billingTab.html' %}
                         </div>
-                        <div class="tab-pane fade" id="nav-security" role="tabpanel" aria-labelledby="nav-security-tab">
+                        <div class="tab-pane fade {% if active_tab == 'security' %}show_tab{% endif %}" id="nav-security" role="tabpanel" aria-labelledby="nav-security-tab">
                             {% include 'component/securityTab.html' %}
                         </div>
                       </div>
