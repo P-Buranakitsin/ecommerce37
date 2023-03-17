@@ -71,8 +71,8 @@ class UserRegisterView(View):
         user_form = UserRegisterForm(request.POST)
         profile_form = UserProfileForm(request.POST)
         if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
+            user = user_form.save(commit=False)
+            user.set_password(request.POST.get('password1'))
             user.save()
 
             profile = profile_form.save(commit=False)
