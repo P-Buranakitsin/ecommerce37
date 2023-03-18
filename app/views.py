@@ -2,22 +2,25 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views import View
-from app.models import UserProfile, CartItem, Commodities
+from app.models import UserProfile, CartItem, Commodities, Type
 from app.forms import UserRegisterForm, UserProfileForm
 from django.contrib import messages
 from django.contrib.auth import login, logout, update_session_auth_hash
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm
 from django.utils.decorators import method_decorator
 
 # Create your views here.
-
-def home(request):
-    context_dict = {}
-    context_dict['most_popular_items'] = [0, 1, 2]
-    context_dict['other_items'] = [0, 1, 2, 3, 4, 5]
-    return render(request, 'app/home.html', context=context_dict)
+class HomeView(View):
+    def get(self, request):
+        popular_commodities = Commodities.objects.filter(type__name='Bag')
+        other_commodities = Commodities.objects.filter(Q(type__name='Clothing') | Q(type__name='Fruit'))
+        context_dict = {}
+        context_dict['most_popular_items'] = popular_commodities
+        context_dict['other_items'] = other_commodities
+        return render(request, 'app/home.html', context=context_dict)
 
 class SearchView(View):
     def get(self, request):

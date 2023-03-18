@@ -31,6 +31,13 @@ class Commodities(models.Model):
 
     def __str__(self):
         return self.c_name
+    
+    @property
+    def image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        else:
+            return ''
 
 class CartItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
