@@ -26,10 +26,11 @@
                         <label class="small mb-1" for="inputUsername">Username</label>
                         <input class="form-control"
                                id="inputUsername"
+                               disabled
                                type="text"
                                placeholder="Enter your username"
-                               value={{user.username}}
-                               disabled>
+                               value={{ user.username|default:"" }}
+                               >
                     </div>
                     <!-- Form Row-->
                     <div class="row gx-3 mb-3">
@@ -39,9 +40,10 @@
                             <input class="form-control"
                                    id="inputFirstName"
                                    type="text"
-                                   placeholder="Enter your first name"
-                                   value={{user.first_name}}
-                                   disabled>
+                                   disabled
+                                   placeholder=""
+                                   value={{ user.first_name|default:"" }}
+                                   >
                         </div>
                         <!-- Form Group (last name)-->
                         <div class="col-md-6">
@@ -49,9 +51,10 @@
                             <input class="form-control"
                                    id="inputLastName"
                                    type="text"
-                                   placeholder="Enter your last name"
-                                   value={{user.last_name}}
-                                   disabled>
+                                   disabled
+                                   placeholder=""
+                                   value={{user.last_name|default:""}}
+                                   >
                         </div>
                     </div>
                     <!-- Form Group (email address)-->
@@ -60,9 +63,10 @@
                         <input class="form-control"
                                id="inputEmailAddress"
                                type="email"
-                               placeholder="Enter your email address"
-                               value={{user.email}}
-                               disabled>
+                               disabled
+                               placeholder=""
+                               value={{user.email|default:""}}
+                               >
                     </div>
                 </form>
             </div>
