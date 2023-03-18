@@ -32,7 +32,7 @@ class Commodities(models.Model):
     def __str__(self):
         return self.c_name
 
-class ShoppingCart(models.Model):
+class CartItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     commodities = models.ForeignKey(Commodities, on_delete=models.PROTECT)
     amount = models.IntegerField()
