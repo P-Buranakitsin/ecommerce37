@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views import View
@@ -8,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth import login, logout, update_session_auth_hash
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
-from django.db.models import Q
+from django.db.models import Q, Sum
 from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm
 from django.utils.decorators import method_decorator
 
@@ -98,7 +99,7 @@ class UserLogoutView(View):
 class CommodityView(View):
     def get(self, request, c_id):
         selected_commodity = Commodities.objects.get(c_id=c_id)
-        related_items = Commodities.objects.filter(type__name='Bag')
+        related_items = Commodities.objects.order_by('?')[:3]
         context_dict={}
         context_dict['related_items'] = related_items
         context_dict['selected_item'] = selected_commodity
@@ -175,6 +176,29 @@ class ProfileView(View):
 
         context = { 'form': form, 'active_tab': 'security'}
         return render(request, 'app/profile.html',context)
+
+class AddtoCart(View):
+    @method_decorator(login_required(login_url=reverse_lazy('app:login')))
+    def get(self, request):
+        return
+    
+    @method_decorator(login_required(login_url=reverse_lazy('app:login')))
+    def post(self, request):
+        c_id = request.POST.get('c_id')
+        commodity = get_object_or_404(Commodities, c_id=c_id)
+        cart_item, created = CartItem.objects.get_or_create(user=request.user, commodities=commodity)
+
+        if created:
+            cart_item.amount = 1
+        else:
+            cart_item.amount += 1
+
+        cart_item.save()
+
+        cart_items_count = CartItem.objects.filter(user=request.user).aggregate(Sum('amount'))
+        total_items = cart_items_count['amount__sum'] if cart_items_count['amount__sum'] is not None else 0
+        return HttpResponse(total_items)
+
 
 #ShoppingCart
 # @login_required
