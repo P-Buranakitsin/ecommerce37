@@ -179,19 +179,20 @@ class ProfileView(View):
 
 class AddtoCart(View):
     @method_decorator(login_required(login_url=reverse_lazy('app:login')))
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         return
     
     @method_decorator(login_required(login_url=reverse_lazy('app:login')))
-    def post(self, request):
-        c_id = request.POST.get('c_id')
+    def post(self, request, *args, **kwargs):
+        c_id = int(request.POST.get('c_id'))
+        amount = int(request.POST.get('amount'))
         commodity = get_object_or_404(Commodities, c_id=c_id)
         cart_item, created = CartItem.objects.get_or_create(user=request.user, commodities=commodity)
 
         if created:
-            cart_item.amount = 1
+            cart_item.amount = amount
         else:
-            cart_item.amount += 1
+            cart_item.amount += amount
 
         cart_item.save()
 
