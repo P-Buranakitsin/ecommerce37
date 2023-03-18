@@ -25,7 +25,11 @@ class HomeView(View):
 
 class SearchView(View):
     def get(self, request):
-        items = Commodities.objects.all()
+        query = request.GET.get('item_name')
+        if (query is None):
+            items = Commodities.objects.all()
+        else:
+            items = Commodities.objects.filter(c_name__icontains=query)
 
         default_page = 1
         page = request.GET.get('page', default_page)

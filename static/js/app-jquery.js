@@ -10,11 +10,6 @@ $(document).ready(function() {
     } else {
         $('.nav-link').removeClass('active')
     }
-
-    $('.search-button').click(function() {
-        alert('Jquery')
-    })
-
     /* Add class show active whenever class sohw_tab presents */
     $('.show_tab').addClass('show active')
 });

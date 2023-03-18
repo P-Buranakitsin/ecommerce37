@@ -9,10 +9,14 @@
         <div class="container">
             <h1 class="jumbotron-heading">Ecommerce Website</h1>
             <p class="lead text-muted">Browse our items from multiple vendors</p>
-            <form class="form-inline mt-2 mt-md-0 justify-content-center">
+            <form 
+            method="get"
+            action="{% url 'app:search' %}"
+            class="form-inline mt-2 mt-md-0 justify-content-center">
                 <input class="form-control mr-sm-2"
                        type="text"
-                       placeholder="Search"
+                       name="item_name"
+                       placeholder="Search by name"
                        aria-label="Search">
                 <button class="btn btn-outline-primary my-2 my-sm-0 search-button" type="submit">Search</button>
             </form>
