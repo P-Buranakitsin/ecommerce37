@@ -52,7 +52,7 @@
                         {% if user.is_authenticated == True %}
                         <a class="btn btn-outline-light my-2 my-sm-0 mr-4 position-relative"
                         href="{% url 'app:cart' %}">Cart <span data-feather="shopping-cart"></span>
-                        <div class="shopping-cart-count">5</div>
+                        <div class="shopping-cart-count">{{ cart_item_count }}</div>
                     </a>
                     <a class="btn btn-outline-light my-2 my-sm-0 mr-4" href="{% url 'app:profile' user.username %}">Profile</a>
                     <a class="btn btn-outline-light my-2 my-sm-0 mr-4" href="{% url 'app:logout' %}">Log out</a>
