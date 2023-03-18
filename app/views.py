@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import View
 from app.models import UserProfile, CartItem, Commodities
 from app.forms import UserRegisterForm, UserProfileForm
@@ -133,7 +133,7 @@ class ProfileView(View):
         
         return (user, user_profile, form)
 
-    @method_decorator(login_required)
+    @method_decorator(login_required(login_url=reverse_lazy('app:login')))
     def get(self, request, username):
         items = []
         for i in range(3):
@@ -161,7 +161,7 @@ class ProfileView(View):
         
         return render(request, 'app/profile.html', context_dict)
     
-    @method_decorator(login_required)
+    @method_decorator(login_required(login_url=reverse_lazy('app:login')))
     def post(self, request, username):
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
