@@ -24,9 +24,7 @@ class HomeView(View):
 
 class SearchView(View):
     def get(self, request):
-        items = []
-        for i in range(12):
-            items.append(i)
+        items = Commodities.objects.all()
 
         default_page = 1
         page = request.GET.get('page', default_page)
@@ -99,10 +97,11 @@ class UserLogoutView(View):
     
 class CommodityView(View):
     def get(self, request, c_id):
-        print(c_id)
+        selected_commodity = Commodities.objects.get(c_id=c_id)
+        related_items = Commodities.objects.filter(type__name='Bag')
         context_dict={}
-        context_dict['related_items'] = [0, 1, 2]
-        context_dict['c_id'] = c_id
+        context_dict['related_items'] = related_items
+        context_dict['selected_item'] = selected_commodity
 
         return render(request, 'app/commodity.html', context=context_dict)
     

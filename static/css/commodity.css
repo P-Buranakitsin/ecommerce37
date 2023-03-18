@@ -18,3 +18,8 @@
 .me-3 {
   margin-right: 1rem !important;
 }
+.selected-item-img {
+  width: 600px;
+  height: 100%;
+  object-fit: cover;
+}
