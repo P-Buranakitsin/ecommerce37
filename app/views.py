@@ -156,7 +156,6 @@ class ProfileView(View):
             (user, user_profile, form) = self.get_user_details(username)
         except TypeError:
             return redirect(reverse('rango:index'))
-
         form = PasswordChangeForm(request.user)
         context_dict = {'form': form, 'items_page': items_page, 'user_profile': user_profile, 'selected_user': user, 'active_tab': 'profile'}
         
@@ -174,22 +173,6 @@ class ProfileView(View):
 
         context = { 'form': form, 'active_tab': 'security'}
         return render(request, 'app/profile.html',context)
-
-
-def register(request):
-    form = CreateUserForm()
-    if request.method == 'POST':
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get("username")
-            messages.success(request, "Account was created for " + user)
-            return redirect('login')
-            #return HttpResponse('1')
-    else:
-        context = {'form': form}
-    return render(request, 'app/register.html', context)
-    #return HttpResponse('2')
 
 #ShoppingCart
 # @login_required

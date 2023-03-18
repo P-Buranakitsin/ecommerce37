@@ -5,5 +5,7 @@
   font-weight: 500;
 }
 .img-account-profile {
-  height: 10rem;
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
 }
