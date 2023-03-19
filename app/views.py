@@ -204,6 +204,11 @@ class AddtoCartView(View):
         total_items = cart_items_count['amount__sum'] if cart_items_count['amount__sum'] is not None else 0
         return JsonResponse({'authenticated': True, 'total_items': total_items})
 
+class RemoveFromCartView(View):
+    @method_decorator(login_required(login_url=reverse_lazy('app:login')))
+    def post(self, request):
+        CartItem.objects.filter(user=request.user).delete()
+        return HttpResponse('')
 
 #ShoppingCart
 # @login_required

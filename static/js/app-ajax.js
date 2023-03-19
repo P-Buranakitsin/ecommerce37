@@ -4,23 +4,38 @@ $(document).ready(function () {
   });
 
   $(".add-to-cart-button").click(function (event) {
-    event.preventDefault()
+    event.preventDefault();
     const csrfToken = $("input[name='csrfmiddlewaretoken']").val();
     const idAttr = $(this).attr("id");
-    const idNumber = (idAttr.match(/\d+/)[0]);
-    let inputQuantity = ($('#inputQuantity').val());
-    inputQuantity = isNaN(inputQuantity) ? 1 : (inputQuantity);
+    const idNumber = idAttr.match(/\d+/)[0];
+    let inputQuantity = $("#inputQuantity").val();
+    inputQuantity = isNaN(inputQuantity) ? 1 : inputQuantity;
     $.post(
       "/add_to_cart/",
       { csrfmiddlewaretoken: csrfToken, c_id: idNumber, amount: inputQuantity },
       function (data) {
         if (!data.authenticated) {
-            window.location.href = '/login/';
+          window.location.href = "/login/";
         } else {
-            $(".shopping-cart-count").html(data.total_items);
-            $("#sucess-modal").modal("show");
+          $(".shopping-cart-count").html(data.total_items);
+          $("#sucess-modal").modal("show");
         }
       }
     );
+  });
+
+  $("#clear-cart-button").click(function (event) {
+    event.preventDefault();
+    const csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+    $.ajax({
+      url: "/remove_from_cart/",
+      type: "POST",
+      data: {
+        csrfmiddlewaretoken: csrfToken,
+      },
+      success: function (data) {
+        window.location.href = '/cart/';
+      },
+    });
   });
 });

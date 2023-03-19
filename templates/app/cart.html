@@ -21,7 +21,7 @@
                                     <th class="text-center">Quantity</th>
                                     <th class="text-center">Subtotal</th>
                                     <th class="text-center">
-                                        <a class="btn btn-sm btn-outline-danger" href="">Clear Cart</a>
+                                        <button class="btn btn-sm btn-outline-danger" id="clear-cart-button" href="">Clear Cart</button>
                                     </th>
                                 </tr>
                             </thead>
@@ -58,4 +58,5 @@
             </div>
         </div>
     </div>
+    {% csrf_token %}
 {% endblock %}
