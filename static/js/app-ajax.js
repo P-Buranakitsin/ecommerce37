@@ -9,7 +9,7 @@ $(document).ready(function () {
     const idAttr = $(this).attr("id");
     const idNumber = idAttr.match(/\d+/)[0];
     let inputQuantity = $("#inputQuantity").val();
-    inputQuantity = isNaN(inputQuantity) ? 1 : inputQuantity;
+    inputQuantity = isNaN(inputQuantity) ? 1 : inputQuantity < 1 ? 1 : inputQuantity;
     $.post(
       "/add_to_cart/",
       { csrfmiddlewaretoken: csrfToken, c_id: idNumber, amount: inputQuantity },
@@ -49,7 +49,8 @@ $(document).ready(function () {
 
     $(".cart-item").each(function () {
       const itemId = $(this).find(".remove-from-cart").data("id");
-      const quantity = Math.max(1, parseInt($(this).find("#inputQuantity").val()) || 1);
+      let quantity = $(this).find("#inputQuantity").val()
+      quantity = isNaN(quantity) ? 1 : quantity < 1 ? 1 : quantity
       cart_items.push({
         itemId,
         quantity,
