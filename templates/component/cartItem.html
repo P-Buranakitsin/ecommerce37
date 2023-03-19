@@ -3,8 +3,7 @@
         <div class="product-item">
             <div class="product-thumb" href="">
                 {% if item.commodities.image_url %}
-                    <img src={{item.commodities.image_url}}
-                         alt="Product">
+                    <img src={{ item.commodities.image_url }} alt="Product">
                 {% else %}
                     <img src="https://www.bootdey.com/image/220x180/FF0000/000000"
                          alt="Product">
@@ -23,12 +22,12 @@
             <input class="form-control" id="inputQuantity" type="num" value={{ item.amount }} name="inputQuantity" for="inputQuantity">
         </div>
     </td>
-    <td class="text-center text-lg text-medium">£{{item.sub_total_price}}</td>
+    <td class="text-center text-lg text-medium">£{{ item.sub_total_price }}</td>
     <td class="text-center">
         <a class="remove-from-cart"
-           href="#"
-           data-toggle="tooltip"
+           href=""
            title=""
-           data-original-title="Remove item"><i class="fa fa-trash"></i></a>
+           data-id={{item.commodities.c_id}}
+           data-original-title="Remove item"><i data-feather="trash-2" class=""></i></a>
     </td>
 </tr>

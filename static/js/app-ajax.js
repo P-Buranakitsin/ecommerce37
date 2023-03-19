@@ -24,17 +24,20 @@ $(document).ready(function () {
     );
   });
 
-  $("#clear-cart-button").click(function (event) {
+  $("#remove-all-from-cart-button, .remove-from-cart").click(function (event) {
     event.preventDefault();
     const csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+    const itemID = $(this).attr("data-id");
+
     $.ajax({
       url: "/remove_from_cart/",
       type: "POST",
       data: {
         csrfmiddlewaretoken: csrfToken,
+        itemID,
       },
       success: function (data) {
-        window.location.href = '/cart/';
+        window.location.href = "/cart/";
       },
     });
   });

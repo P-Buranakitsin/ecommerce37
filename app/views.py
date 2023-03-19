@@ -207,7 +207,13 @@ class AddtoCartView(View):
 class RemoveFromCartView(View):
     @method_decorator(login_required(login_url=reverse_lazy('app:login')))
     def post(self, request):
-        CartItem.objects.filter(user=request.user).delete()
+        itemID = (request.POST.get('itemID'))
+        
+        if (itemID is None):
+            CartItem.objects.filter(user=request.user).delete()
+        else:
+            CartItem.objects.filter(user=request.user, commodities__c_id=itemID).delete()
+
         return HttpResponse('')
 
 #ShoppingCart
