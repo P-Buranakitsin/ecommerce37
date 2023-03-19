@@ -41,4 +41,32 @@ $(document).ready(function () {
       },
     });
   });
+
+  $("#update-cart").click(function (event) {
+    event.preventDefault();
+    const csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+    let cart_items = [];
+
+    $(".cart-item").each(function () {
+      const itemId = $(this).find(".remove-from-cart").data("id");
+      const quantity = parseInt($(this).find("#inputQuantity").val()) || 1;
+      cart_items.push({
+        itemId,
+        quantity,
+      });
+    });
+    console.log(cart_items)
+
+    $.ajax({
+      url: "/update_cart/",
+      type: "POST",
+      data: {
+        csrfmiddlewaretoken: csrfToken,
+        cart_items: JSON.stringify(cart_items),
+      },
+      success: function (data) {
+        window.location.href = "/cart/";
+      },
+    });
+  });
 });

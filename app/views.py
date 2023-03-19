@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q, Sum
 from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm
 from django.utils.decorators import method_decorator
+import json
 
 # Create your views here.
 class HomeView(View):
@@ -213,6 +214,22 @@ class RemoveFromCartView(View):
             CartItem.objects.filter(user=request.user).delete()
         else:
             CartItem.objects.filter(user=request.user, commodities__c_id=itemID).delete()
+
+        return HttpResponse('')
+    
+class UpdateCartView(View):
+    @method_decorator(login_required(login_url=reverse_lazy('app:login')))
+    def post(self, request):
+        cart_items = request.POST.get('cart_items')
+        cart_items = (json.loads(cart_items))
+        for item in cart_items:
+            item_id = item['itemId']
+            quantity = item['quantity']
+
+            # filter the CartItem queryset with specific commodities_id and user
+            cart_item = CartItem.objects.filter(commodities__c_id=item_id, user=request.user)
+            # update the amount field
+            cart_item.update(amount=quantity)
 
         return HttpResponse('')
 
