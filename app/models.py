@@ -47,6 +47,10 @@ class CartItem(models.Model):
     def __str__(self):
         return self.user.username + "_" + self.commodities.c_name + "_" + str(self.commodities.c_id)
     
+    @property
+    def sub_total_price(self):
+        return self.commodities.price * self.amount
+    
     """
     def __init__(self, *args, **kwargs):
         self.items = []

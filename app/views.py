@@ -110,22 +110,19 @@ class CommodityView(View):
 
         return render(request, 'app/commodity.html', context=context_dict)
     
-    def post(self, request, c_id):
-        print(request.POST.get('inputQuantity'))
-        context_dict={}
-        context_dict['related_items'] = [0, 1, 2]
-
-        return render(request, 'app/commodity.html', context=context_dict)
-    
 class ContactUsView(View):
     def get(self, request):
         context_dict={}
         return render(request, 'app/contactUs.html', context_dict)
     
 class CartView(View):
+    @method_decorator(login_required(login_url=reverse_lazy('app:login')))
     def get(self, request):
+        cart_items = CartItem.objects.filter(user=request.user)
+        total_price = sum(item.sub_total_price for item in cart_items)
         context_dict={}
-        context_dict['cart_items'] = [0, 1, 2]
+        context_dict['cart_items'] = cart_items
+        context_dict['total_price'] = total_price
         return render(request, 'app/cart.html', context_dict)
 
 class ProfileView(View):
