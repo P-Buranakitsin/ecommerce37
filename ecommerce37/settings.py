@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
-    'registration',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +64,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
+                'app.context_processors.cart_item_count',
             ],
         },
     },
@@ -124,12 +125,6 @@ STATIC_URL = '/static/'
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [STATIC_DIR, ]
 
-# If True, users can register.
-REGISTRATION_OPEN = True
-# If True, the user will be automatically logged in after registering.
-REGISTRATION_AUTO_LOGIN = True
-# The URL that Django redirects users to after logging in.
-LOGIN_REDIRECT_URL = 'app:home'
-# The page users are directed to if they are not logged in.
-# This was set in a previous chapter. The registration package uses this, too.
-LOGIN_URL = 'auth_login'
+MEDIA_DIR = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = MEDIA_DIR
+MEDIA_URL = '/media/'

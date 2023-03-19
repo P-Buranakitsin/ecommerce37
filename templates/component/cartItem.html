@@ -1,0 +1,34 @@
+<tr class="cart-item">
+    <td>
+        <div class="product-item">
+            <div class="product-thumb" href="">
+                {% if item.commodities.image_url %}
+                    <img src={{ item.commodities.image_url }} alt="Product">
+                {% else %}
+                    <img src="https://www.bootdey.com/image/220x180/FF0000/000000"
+                         alt="Product">
+                {% endif %}
+            </div>
+            <div class="product-info">
+                <h4 class="product-title">
+                    <a href="">{{ item.commodities.c_name }}</a>
+                </h4>
+                <span>{{ item.commodities.description }}</span>
+                <a href="{% url 'app:commodity' item.commodities.c_id %}" class="btn btn-sm btn-outline-primary mt-2" href="">View</a>
+            </div>
+        </div>
+    </td>
+    <td class="text-center">
+        <div class="count-input">
+            <input class="form-control" id="inputQuantity" type="num" value={{ item.amount }} name="inputQuantity" for="inputQuantity">
+        </div>
+    </td>
+    <td class="text-center text-lg text-medium">£{{ item.sub_total_price }}</td>
+    <td class="text-center">
+        <a class="remove-from-cart"
+           href=""
+           title=""
+           data-id={{item.commodities.c_id}}
+           data-original-title="Remove item"><i data-feather="trash-2" class=""></i></a>
+    </td>
+</tr>

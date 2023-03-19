@@ -1,0 +1,62 @@
+{% extends 'app/baseWithFootNav.html' %}
+{% load staticfiles %}
+{% block css_extend %}
+    <link rel="stylesheet" href="{% static "css/commodity.css" %}" />
+{% endblock %}
+{% block title_block %}Commodity{% endblock %}
+{% block body_block %}
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    {% if selected_item.image_url %}
+                        <img class="card-img-top mb-5 mb-md-0 selected-item-img" src={{ selected_item.image_url }} alt="...">
+                    {% else %}
+                        <img class="card-img-top mb-5 mb-md-0"
+                             src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg"
+                             alt="...">
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <div class="small mb-1">ECOMMERCE_37: ID {{ selected_item.c_id }}</div>
+                    <h1 class="display-5 fw-bolder">{{ selected_item.c_name }}</h1>
+                    <div class="fs-5 mb-5">
+                        <span>£{{ selected_item.price }}</span>
+                    </div>
+                    <p class="lead">{{ selected_item.description }}</p>
+                    <div class="d-flex">
+                        <form method="post"
+                              id="commodity-add-to-cart-form"
+                              class="form-inline mt-2 mt-md-0 justify-content-center">
+                            {% csrf_token %}
+                            <input class="form-control text-center me-3"
+                                   id="inputQuantity"
+                                   type="num"
+                                   value="1"
+                                   name="inputQuantity"
+                                   for="inputQuantity"
+                                   style="max-width: 3rem">
+                            <button class="btn btn-outline-primary flex-shrink-0 add-to-cart-button" type="submit" id="commodity_id_{{selected_item.c_id}}">Add to cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="fw-bolder mb-4">Related Products</h2>
+                </div>
+                {% if related_items %}
+                    {% for item in related_items %}
+                        <div class="col-md-4">{% include 'component/card.html' %}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    {% csrf_token %}
+{% include 'component/modalSuccess.html' %}
+{% endblock %}

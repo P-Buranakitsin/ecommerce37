@@ -1,5 +1,9 @@
 {% extends 'app/base.html' %}
 {% load staticfiles %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/baseWithFootNav.css" %}" />
+    {% block css_extend %}{% endblock %}
+{% endblock %}
 {% block navbar %}
     <header class="sticky-top">
         <div class="navbar navbar-expand-lg  navbar-dark bg-primary shadow-sm">
@@ -35,30 +39,39 @@
                 <div class="collapse navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'app:home' %}">Home</a>
+                            <a class="nav-link" id="nav-link-home" href="{% url 'app:home' %}">Home</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="{% url 'app:home' %}">Search</a>
+                            <a class="nav-link" id="nav-link-search" href="{% url 'app:search' %}">Search</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'app:home' %}">Contact Us</a>
+                            <a class="nav-link" id="nav-link-contact-us" href="{% url 'app:contactUs' %}">Contact Us</a>
                         </li>
                     </ul>
                     <form class="form-inline">
-                        <a class="btn btn-outline-light my-2 my-sm-0 mr-4"
-                           href="{% url 'auth_login' %}">Log in</a>
-                        <a class="btn btn-outline-light my-2 my-sm-0"
-                           href="{% url 'registration_register' %}">Register</a>
-                    </form>
-                </div>
-            </div>
+                        {% if user.is_authenticated == True %}
+                        <a class="btn btn-outline-light my-2 my-sm-0 mr-4 position-relative"
+                        href="{% url 'app:cart' %}">Cart <span data-feather="shopping-cart"></span>
+                        <div class="shopping-cart-count">{{ cart_item_count }}</div>
+                    </a>
+                    <a class="btn btn-outline-light my-2 my-sm-0 mr-4" href="{% url 'app:profile' user.username %}">Profile</a>
+                    <a class="btn btn-outline-light my-2 my-sm-0 mr-4" href="{% url 'app:logout' %}">Log out</a>
+                {% else %}
+                    <a class="btn btn-outline-light my-2 my-sm-0 mr-4"
+                       href="{% url 'app:login' %}">Log in</a>
+                    <a class="btn btn-outline-light my-2 my-sm-0"
+                       href="{% url 'app:register' %}">Register</a>
+                {% endif %}
+            </form>
         </div>
-    </header>
+    </div>
+</div>
+</header>
 {% endblock %}
 {% block footer %}
-<footer class="text-muted bg-light mt-auto">
-    <div class="container">
-        <p class="">© Company Inc. 2023. We love our users!</p>
-    </div>
-</footer>
+    <footer class="text-muted bg-light mt-auto">
+        <div class="container">
+            <p class="">© Company Inc. 2023. We love our users!</p>
+        </div>
+    </footer>
 {% endblock %}

@@ -1,0 +1,18 @@
+.header {
+    background-color: #7950d9;
+    height: 100px;
+    width: 100%;
+}
+.logout {
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+.logout a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+.logout a:hover {
+    color: #f2f2f2;
+}

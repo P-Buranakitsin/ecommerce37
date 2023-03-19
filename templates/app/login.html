@@ -1,0 +1,52 @@
+{% extends 'app/base.html' %}
+{% load staticfiles %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/login.css" %}" />
+{% endblock %}
+{% block title_block %}Login{% endblock %}
+{% block body_block %}
+    <div class="container h-100">
+        <div class="row h-100 align-items-center justify-content-center">
+            <div class="col-md-6">
+                <form method="post" action=".">
+                    <h1>Log in</h1>
+                    {% csrf_token %}
+                    <legend style="font-size: 2em;margin-bottom: 15px;white-space: normal;">
+                        <span style="display: block;">Welcome back!</span>
+                    </legend>
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">Username</label>
+                        <input type="text"
+                               name="username"
+                               class="form-control"
+                               autofocus=""
+                               required=""
+                               id="id_username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_password" class="form-label">Password</label>
+                        <input type="password"
+                               class="form-control"
+                               name="password"
+                               required=""
+                               id="id_password">
+                    </div>
+                    {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            <ul>
+                                {% for field, errors in form.errors.items %}
+                                    {% for error in errors %}<li>{{ error }}</li>{% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    <input type="submit" value="Log In" class="btn btn-primary" />
+                    <p class="footer-text">
+                        Not registered?
+                        <a href="{% url 'app:register' %}">Register here!</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
