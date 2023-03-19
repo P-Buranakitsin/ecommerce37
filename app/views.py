@@ -181,7 +181,7 @@ class ProfileView(View):
         context = { 'form': form, 'active_tab': 'security'}
         return render(request, 'app/profile.html',context)
 
-class AddtoCart(View):
+class AddtoCartView(View):
     @method_decorator(login_required(login_url=reverse_lazy('app:login')))
     def get(self, request, *args, **kwargs):
         return
