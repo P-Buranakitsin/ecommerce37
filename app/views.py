@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views import View
@@ -188,6 +188,9 @@ class AddtoCart(View):
     
     @method_decorator(login_required(login_url=reverse_lazy('app:login')))
     def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return JsonResponse({'authenticated': False})
+        
         c_id = int(request.POST.get('c_id'))
         amount = int(request.POST.get('amount'))
         commodity = get_object_or_404(Commodities, c_id=c_id)
@@ -202,7 +205,7 @@ class AddtoCart(View):
 
         cart_items_count = CartItem.objects.filter(user=request.user).aggregate(Sum('amount'))
         total_items = cart_items_count['amount__sum'] if cart_items_count['amount__sum'] is not None else 0
-        return HttpResponse(total_items)
+        return JsonResponse({'authenticated': True, 'total_items': total_items})
 
 
 #ShoppingCart

@@ -14,8 +14,12 @@ $(document).ready(function () {
       "/add_to_cart/",
       { csrfmiddlewaretoken: csrfToken, c_id: idNumber, amount: inputQuantity },
       function (data) {
-        $(".shopping-cart-count").html(data);
-        $("#sucess-modal").modal("show");
+        if (!data.authenticated) {
+            window.location.href = '/login/';
+        } else {
+            $(".shopping-cart-count").html(data.total_items);
+            $("#sucess-modal").modal("show");
+        }
       }
     );
   });
