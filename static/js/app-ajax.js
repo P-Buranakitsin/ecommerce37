@@ -49,13 +49,13 @@ $(document).ready(function () {
 
     $(".cart-item").each(function () {
       const itemId = $(this).find(".remove-from-cart").data("id");
-      const quantity = parseInt($(this).find("#inputQuantity").val()) || 1;
+      const quantity = Math.max(1, parseInt($(this).find("#inputQuantity").val()) || 1);
       cart_items.push({
         itemId,
         quantity,
       });
     });
-    console.log(cart_items)
+    console.log(cart_items);
 
     $.ajax({
       url: "/update_cart/",

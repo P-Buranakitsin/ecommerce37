@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.forms import ValidationError
 from django.utils import timezone
 
 # Create your models here.
@@ -43,6 +44,10 @@ class CartItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     commodities = models.ForeignKey(Commodities, on_delete=models.PROTECT)
     amount = models.IntegerField(default=0)
+
+    def clean(self):
+        if self.amount < 0:
+            raise ValidationError('Amount cannot be negative')
 
     def __str__(self):
         return self.user.username + "_" + self.commodities.c_name + "_" + str(self.commodities.c_id)
