@@ -51,12 +51,14 @@
                         </div>
                         <div class="column">
                             <a id="update-cart" class="btn btn-primary text-white">Update Cart</a>
-                            <a class="btn btn-primary" href="">Checkout</a>
+                            <button id="checkout-cart" class="btn btn-primary text-white">Checkout</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    {% include 'component/modalSuccess.html' %}
+    {% include 'component/modalError.html' %}
     {% csrf_token %}
 {% endblock %}
