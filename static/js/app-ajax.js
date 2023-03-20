@@ -1,4 +1,9 @@
 $(document).ready(function () {
+  $(".view-commodity-button").click(function () {
+    console.log($(this).attr("value"));
+    window.location.href = "/commodity/" + $(this).attr("value")
+  });
+
   $(".add-to-cart-button").click(function (event) {
     event.preventDefault();
     const csrfToken = $("input[name='csrfmiddlewaretoken']").val();

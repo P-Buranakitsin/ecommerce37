@@ -19,10 +19,9 @@
         <p class="card-text"></p>
         <div class="d-flex flex-md-column flex-lg-row justify-content-between align-items-center">
             <div class="btn-group">
-                <form action="{% url 'app:commodity' item.c_id %}">
-                    <button type="submit"
-                            class="btn btn-sm btn-outline-primary view-commodity-button">View</button>
-                </form>
+                <button type="button"
+                        value={{item.c_id }}
+                        class="btn btn-sm btn-outline-primary view-commodity-button">View</button>
                 <button type="button"
                         id="commodity_id_{{ item.c_id }}"
                         class="btn btn-sm btn-outline-primary add-to-cart-button">
