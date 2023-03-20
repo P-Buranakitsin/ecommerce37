@@ -29,9 +29,6 @@
                                             <span class="font-weight-bold">Quantity:</span> {{ item.amount }}
                                         </p>
                                         <a href="{% url 'app:commodity' item.commodities.c_id %}" class="btn btn-outline-primary mt-2" href="">View</a>
-                                        {% comment %} <a href="{% url 'app:commodity' item %}"
-    type="button"
-    class="btn btn-outline-primary mb-2">View</a> {% endcomment %}
                                         <p class="card-text">
                                             <small class="text-muted">Purchased on: {{ item.purchase_date }}</small>
                                         </p>

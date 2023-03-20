@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import Http404, HttpResponse, JsonResponse
+from django.http import Http404, HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views import View
@@ -247,6 +247,18 @@ class CheckoutCartView(View):
         CartItem.objects.filter(user=request.user).delete()
 
         return HttpResponse("Thank you for your purchase! Your items have been added to your profile.")
+    
+class UploadProfileImageView(View):
+    @method_decorator(login_required(login_url=reverse_lazy('app:login')))
+    def post(self, request):
+        if 'picture' in request.FILES:
+            user_profile = request.user.userprofile
+            user_profile.picture = request.FILES['picture']
+            user_profile.save()
+            image_url = user_profile.picture.url
+            return JsonResponse({'image_url': image_url})
+
+        return HttpResponseBadRequest()
 
 #ShoppingCart
 # @login_required

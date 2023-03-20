@@ -90,13 +90,38 @@ $(document).ready(function () {
         $("#sucess-modal").modal("show");
         setTimeout(() => {
           window.location.href = "/cart/";
-        }, 2000)
+        }, 2000);
       },
       error: function (xhr, status, error) {
         const errorMessage = xhr.responseJSON.error;
         $("#error-modal").find(".modal-body").text(errorMessage);
         $("#error-modal").modal("show");
       },
+    });
+  });
+
+  $("#file-upload").change(function (event) {
+    // Get the selected file
+    const selectedFile = event.target.files[0];
+    const csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+    const formData = new FormData();
+    formData.append('picture', selectedFile);
+    $.ajax({
+      url: "/upload_profile_image/",
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      headers: {
+        "X-CSRFToken": csrfToken
+      },
+      success: function (data) {
+        // Handle success response
+        $(".img-account-profile").attr("src", data.image_url);
+      },
+      error: function (xhr, status, error) {
+        // Handle error response
+      }
     });
   });
 });
