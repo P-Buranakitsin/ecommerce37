@@ -23,7 +23,7 @@ class Commodities(models.Model):
     c_id = models.BigAutoField(primary_key=True)
     c_name = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to='Commodities/', blank=True, null=True)
+    image = models.ImageField(upload_to='images/commodities', blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     type = models.ForeignKey(Type, on_delete=models.CASCADE)
     #inventory

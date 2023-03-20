@@ -42,7 +42,7 @@ commodity1 = Commodities.objects.create(
     c_name='Orange',
     price=10.00,
     description='This is the description for Orange.',
-    image='images/Commodities/Orange.png',
+    image='images/commodities/Orange.png',
     type=t2,
 )
 
@@ -51,7 +51,7 @@ commodity2 = Commodities.objects.create(
     c_name='Cherry',
     price=10.00,
     description='This is the description for Cherry.',
-    image='images/Commodities/Cherry.png',
+    image='images/commodities/Cherry.png',
     type=t2,
 )
 
@@ -60,7 +60,7 @@ commodity3 = Commodities.objects.create(
     c_name='Headphone',
     price=49.99,
     description='This is the description for Headphone.',
-    image='images/Commodities/Headphone.png',
+    image='images/commodities/Headphone.png',
     type=t1,
 )
 
@@ -69,7 +69,7 @@ commodity4 = Commodities.objects.create(
     c_name='iPhone8',
     price=154.99,
     description='Apple iPhone 8, 64GB, Red (Renewed).',
-    image='images/Commodities/iPhone8.png',
+    image='images/commodities/iPhone8.png',
     type=t1,
 )
 
@@ -78,7 +78,7 @@ commodity5 = Commodities.objects.create(
     c_name='Cleanser',
     price=4.99,
     description='CeraVe Hydrating Cleanser for Normal to Dry Skin 473ml with Hyaluronic Acid & 3 Essential Ceramides.',
-    image='images/Commodities/Cleanser.png',
+    image='images/commodities/Cleanser.png',
     type=t5,
 )
 
@@ -87,7 +87,7 @@ commodity6 = Commodities.objects.create(
     c_name='T-Shirt',
     price=20.99,
     description='',
-    image='images/Commodities/T-Shirt.png',
+    image='images/commodities/T-Shirt.png',
     type=t4,
 )
 
@@ -96,7 +96,7 @@ commodity7 = Commodities.objects.create(
     c_name='Switch',
     price=220.99,
     description='Nintendo Switch Neon Red/Neon Blue with Mario Kart 8 Deluxe and 3 Month Nintendo Switch Online Membership',
-    image='images/Commodities/Switch.png',
+    image='images/commodities/Switch.png',
     type=t1,
 )
 
@@ -105,7 +105,7 @@ commodity8 = Commodities.objects.create(
     c_name='Backpack',
     price=299.99,
     description='Gomatic Laptop Bag Backpack - 20L to 30L Expandable Business Travel Back Pack, Anti Theft & TSA Approved, Hand Underseat Luggage or Cabin Carry On, The Most Functional Water Resistant Rucksack Ever',
-    image='images/Commodities/Backpack.png',
+    image='images/commodities/Backpack.png',
     type=t3,
 )
 
@@ -114,7 +114,7 @@ commodity9 = Commodities.objects.create(
     c_name='Bag',
     price=29.95,
     description='AviiatoR® Hot Food Delivery Bag With Divider Thermal Insulated 40*40*35cm For Indian, Kebabs, Chinese, Pizza For Restaurants, Couriers, Picnic Cooler Bag, Groceries Boot Organiser Catering Warm Bags',
-    image='images/Commodities/Bag.png',
+    image='images/commodities/Bag.png',
     type=t3,
 )
 
@@ -123,7 +123,7 @@ commodity10 = Commodities.objects.create(
     c_name='Shoes',
     price=179.99,
     description='Timberland Mens 6 Inch WR Basic Fashion Boots',
-    image='images/Commodities/Shoes.png',
+    image='images/commodities/Shoes.png',
     type=t3,
 )
 
@@ -132,7 +132,7 @@ commodity11 = Commodities.objects.create(
     c_name='Watch',
     price=157.98,
     description='Timberland Dress Watch TBL15951JSB.03',
-    image='images/Commodities/Watch.png',
+    image='images/commodities/Watch.png',
     type=t5,
 )
 
@@ -141,7 +141,7 @@ commodity12 = Commodities.objects.create(
     c_name='Record_player',
     price=69.99,
     description='',
-    image='images/Commodities/Record_player.png',
+    image='images/commodities/Record_player.png',
     type=t1,
 )
 
