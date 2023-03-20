@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, JsonResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views import View
-from app.models import UserProfile, CartItem, Commodities, Type
+from app.models import UserProfile, CartItem, Commodities, Type, Purchase
 from app.forms import UserRegisterForm, UserProfileForm
 from django.contrib import messages
 from django.contrib.auth import login, logout, update_session_auth_hash
@@ -140,9 +140,7 @@ class ProfileView(View):
 
     @method_decorator(login_required(login_url=reverse_lazy('app:login')))
     def get(self, request, username):
-        items = []
-        for i in range(3):
-            items.append(i)
+        items = Purchase.objects.filter(user=request.user)
 
         default_page = 1
         page = request.GET.get('page', default_page)
@@ -232,6 +230,23 @@ class UpdateCartView(View):
             cart_item.update(amount=quantity)
 
         return HttpResponse('')
+    
+class CheckoutCartView(View):
+    @method_decorator(login_required(login_url=reverse_lazy('app:login')))
+    def post(self, request):
+        cart_items = CartItem.objects.filter(user=request.user)
+        if (len(cart_items) < 1):
+            return JsonResponse({'error': 'No item to checkout'}, status=404)
+        
+        for cart_item in cart_items:
+            purchase = Purchase()
+            purchase.user = cart_item.user
+            purchase.commodities = cart_item.commodities
+            purchase.amount = cart_item.amount
+            purchase.save()
+        CartItem.objects.filter(user=request.user).delete()
+
+        return HttpResponse("Thank you for your purchase! Your items have been added to your profile.")
 
 #ShoppingCart
 # @login_required

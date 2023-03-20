@@ -9,7 +9,11 @@ $(document).ready(function () {
     const idAttr = $(this).attr("id");
     const idNumber = idAttr.match(/\d+/)[0];
     let inputQuantity = $("#inputQuantity").val();
-    inputQuantity = isNaN(inputQuantity) ? 1 : inputQuantity < 1 ? 1 : inputQuantity;
+    inputQuantity = isNaN(inputQuantity)
+      ? 1
+      : inputQuantity < 1
+      ? 1
+      : inputQuantity;
     $.post(
       "/add_to_cart/",
       { csrfmiddlewaretoken: csrfToken, c_id: idNumber, amount: inputQuantity },
@@ -49,8 +53,8 @@ $(document).ready(function () {
 
     $(".cart-item").each(function () {
       const itemId = $(this).find(".remove-from-cart").data("id");
-      let quantity = $(this).find("#inputQuantity").val()
-      quantity = isNaN(quantity) ? 1 : quantity < 1 ? 1 : quantity
+      let quantity = $(this).find("#inputQuantity").val();
+      quantity = isNaN(quantity) ? 1 : quantity < 1 ? 1 : quantity;
       cart_items.push({
         itemId,
         quantity,
@@ -67,6 +71,31 @@ $(document).ready(function () {
       },
       success: function (data) {
         window.location.href = "/cart/";
+      },
+    });
+  });
+
+  $("#checkout-cart").click(function (event) {
+    event.preventDefault();
+    const csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+    console.log("check out");
+    $.ajax({
+      url: "/checkout_cart/",
+      type: "POST",
+      data: {
+        csrfmiddlewaretoken: csrfToken,
+      },
+      success: function (data) {
+        $("#sucess-modal").find(".modal-body").text(data);
+        $("#sucess-modal").modal("show");
+        setTimeout(() => {
+          window.location.href = "/cart/";
+        }, 2000)
+      },
+      error: function (xhr, status, error) {
+        const errorMessage = xhr.responseJSON.error;
+        $("#error-modal").find(".modal-body").text(errorMessage);
+        $("#error-modal").modal("show");
       },
     });
   });

@@ -40,6 +40,15 @@ class Commodities(models.Model):
         else:
             return ''
 
+class Purchase(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    commodities = models.ForeignKey(Commodities, on_delete=models.PROTECT)
+    amount = models.IntegerField(default=0)
+    purchase_date = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.user.username + "_" + self.commodities.c_name + "_" + str(self.commodities.c_id)
+
 class CartItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     commodities = models.ForeignKey(Commodities, on_delete=models.PROTECT)
