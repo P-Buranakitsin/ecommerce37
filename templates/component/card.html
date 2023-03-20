@@ -1,13 +1,6 @@
 <div class="card mb-4 box-shadow">
     {% if item.image_url %}
-        <img class="card-img-top"
-             data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-             alt={{item.c_name}}
-             style="height: 225px;
-                    width: 100%;
-                    display: block"
-             src={{item.image_url}}
-             data-holder-rendered="true">
+        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt={{ item.c_name }} style="height: 225px; width: 100%; display: block" src={{ item.image_url }} data-holder-rendered="true">
     {% else %}
         <img class="card-img-top"
              data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
@@ -26,13 +19,15 @@
         <p class="card-text"></p>
         <div class="d-flex flex-md-column flex-lg-row justify-content-between align-items-center">
             <div class="btn-group">
-                <a href="{% url 'app:commodity' item.c_id %}"
-                   type="button"
-                   class="btn btn-sm btn-outline-primary view-commodity-button"
-                   value="{{ item }}">View</a>
+                <form action="{% url 'app:commodity' item.c_id %}">
+                    <button type="submit"
+                            class="btn btn-sm btn-outline-primary view-commodity-button">View</button>
+                </form>
                 <button type="button"
-                        id="commodity_id_{{item.c_id}}"
-                        class="btn btn-sm btn-outline-primary add-to-cart-button">Add to Cart</button>
+                        id="commodity_id_{{ item.c_id }}"
+                        class="btn btn-sm btn-outline-primary add-to-cart-button">
+                    Add to Cart
+                </button>
             </div>
             <div class="d-flex flex-column">
                 <p class="text-right text-secondary">{{ item.price }} GBP</p>
