@@ -1,3 +1,11 @@
 db.sqlite3
 __pycache__/
 *.pyc
+media/*
+
+# Ignore app migrations and cache
+/app/migrations/
+/app/__pycache__/
+
+# Ignore ecommerce37 cache
+/ecommerce37/__pycache__/

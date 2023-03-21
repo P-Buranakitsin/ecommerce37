@@ -137,9 +137,8 @@ class ProfileView(View):
         form = UserProfileForm({'picture': user_profile.picture})
         
         return (user, user_profile, form)
-
-    @method_decorator(login_required(login_url=reverse_lazy('app:login')))
-    def get(self, request, username):
+    
+    def paginate_user_purchases(self, request, username):
         items = Purchase.objects.filter(user=request.user)
 
         default_page = 1
@@ -159,13 +158,18 @@ class ProfileView(View):
             (user, user_profile, form) = self.get_user_details(username)
         except TypeError:
             return redirect(reverse('rango:index'))
+        return (items_page, user_profile, user)
+
+    @method_decorator(login_required(login_url=reverse_lazy('app:login')))
+    def get(self, request, username):
+        (items_page, user_profile, user) = self.paginate_user_purchases(request, username)
         form = PasswordChangeForm(request.user)
-        context_dict = {'form': form, 'items_page': items_page, 'user_profile': user_profile, 'selected_user': user, 'active_tab': 'profile'}
-        
+        context_dict = {'form': form, 'items_page': items_page, 'user_profile': user_profile, 'selected_user': user, 'active_tab': 'profile'}    
         return render(request, 'app/profile.html', context_dict)
     
     @method_decorator(login_required(login_url=reverse_lazy('app:login')))
     def post(self, request, username):
+        (items_page, user_profile, user) = self.paginate_user_purchases(request, username)
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
@@ -173,9 +177,9 @@ class ProfileView(View):
             return redirect(reverse('app:home'))
         else:
             print(form.errors)
-
-        context = { 'form': form, 'active_tab': 'security'}
-        return render(request, 'app/profile.html',context)
+        
+        context_dict = {'form': form, 'items_page': items_page, 'user_profile': user_profile, 'selected_user': user, 'active_tab': 'security'}
+        return render(request, 'app/profile.html',context_dict)
 
 class AddtoCartView(View):
     @method_decorator(login_required(login_url=reverse_lazy('app:login')))
